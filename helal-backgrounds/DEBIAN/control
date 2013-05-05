@@ -1,0 +1,12 @@
+Package: helal-backgrounds
+Version: 0.9.9.9
+Architecture: i386
+Maintainer: hannysabbagh <hannysabbagh@hotmail.com>
+Depends: dpkg (>= 1.0)
+Section: system
+Priority: optional
+Description: Helal Linux backgrounds
+ a cool set of wallpapers for Helal Linux-Gnome.
+ .
+ Homepage: http://helallinux.com
+
