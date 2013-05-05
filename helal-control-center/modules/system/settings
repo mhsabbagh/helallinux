@@ -1,0 +1,7 @@
+[module]
+name = Gnome Settings
+name[ar] = إعدادات جنوم
+ico = settings.png
+desc = Adjust system settings
+desc[ar] = ضبط إعدادات النظام
+command = gnome-control-center

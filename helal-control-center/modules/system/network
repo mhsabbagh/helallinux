@@ -1,0 +1,7 @@
+[module]
+name = Netowork Manager
+name[ar] = مدير الشبكة
+ico = network.png
+desc = Adjust Netowork settings
+desc[ar] = ضبط إعدادات الشبكة
+command = gnome-control-center network

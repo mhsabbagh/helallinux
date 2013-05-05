@@ -1,0 +1,129 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+* {direction: rtl;
+}
+
+#image {
+
+  border-radius:25px;
+float: left;
+width: 777px;
+display: inline;
+text-align: right;
+}
+
+h1 {
+color: #373573;
+font-size: 40px;
+text-shadow: 2px 2px #eee;
+}
+h2 {
+color: #6ad1f3;
+text-shadow: 2px 2px #eee;
+}
+.hero-unit h1 {
+color: #6ad1f3;
+font-size: 60px;
+}
+
+body {
+background-image:url('http://www.ubuntu.com/static/u/img/patterns/background-dots-small.png');
+background-repeat:repeat-y repeat-x;
+}
+
+.brand{		
+		font-size:20px;
+		
+	}
+
+
+
+.hero-unit {
+background-image:url('http://www.ubuntu.com/static/u/img/patterns/background-dots-small.png');
+background-repeat:repeat-y repeat-x;
+border:5px #6ad1f3;
+border-style:dashed;
+border-radius:25px;
+
+}
+
+
+
+
+.span {
+
+	width: 250px;
+	padding-right: 100px;
+	border:4px dashed #0079cc;
+border-radius:25px;
+	}
+.raw {
+
+	width: 250px;
+	padding-right: 100px;
+	border:4px dashed #0079cc;
+border-radius:25px;
+	}
+
+.span4 p h2 {
+
+margin:20px;
+	text-align: right;			
+}
+
+.span4 img {
+
+	display: inline;
+	margin-left: 10px;
+	float: right;
+	text-align: right;		
+}
+.download{
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin-top: 50px;
+	margin-left: 50px;
+	margin-bottom: 50px;
+	margin-right: 250px;
+background-color: #fff;
+width: 800px;
+border-radius:25px;
+
+}
+
+.download img{
+text-align: left;
+float: left;
+border-radius:30px;
+}
+.sidebar {
+float: right;
+background-color: #fff;
+border-radius:25px;
+width: 225px;
+height: 600px;
+}
+
+.screenshots{
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin-top: 50px;
+	margin-left: 50px;
+	margin-bottom: 50px;
+	margin-right: 250px;
+background-color: #fff;
+width: 840px;
+
+border-radius:25px;
+
+}
+
+

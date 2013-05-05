@@ -1,0 +1,9 @@
+[module]
+name = New Themes
+name[ar] = سِمات جديدة
+ico = download.png
+desc = download new themes from the internet
+desc[ar] = تحميل سِمات جديدة من الإنترنت
+command = sensible-browser http://gnome-look.org
+
+

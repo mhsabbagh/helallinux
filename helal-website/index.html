@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+
+<link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>هلال لينُكس</title>
+        <meta name="description" content="الموقع الرسمي لتوزيعة هلال لينُكس العربية.">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+			
+			
+#slider {
+  position:absolute !important;
+  top:400px;
+  left:50%;
+  width:650px;
+  height:350px;
+  margin-top:-175px;
+  margin-left:-325px;
+  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.5), 0px 0px 20px rgba(0,0,0,.2);
+  -moz-box-shadow: 0px 0px 5px rgba(0,0,0,.5), 0px 0px 20px rgba(0,0,0,.2);
+  box-shadow: 0px 0px 5px rgba(0,0,0,.5), 0px 0px 20px rgba(0,0,0,.2);
+ }
+ 
+ .nivoSlider img {
+  position:absolute;
+  top:0;
+  left:0;
+  display:none;
+ }
+ 
+ .nivoSlider a {
+  border:0;
+  display:block;
+ }
+ 
+ .nivo-slice {
+  display:block;
+  position:absolute;
+  z-index:5;
+  height:100%;
+ }
+ 
+ .nivo-box {
+  display:block;
+  position:absolute;
+  z-index:5;
+ }
+ 
+ .nivo-caption {
+  position:absolute;
+  left:75px;
+  bottom:29px;
+  width:498px;
+  padding-top:2px;
+  padding-bottom:13px;
+  z-index:8;
+  border:1px solid #000;
+  border-left-color:rgba(0,0,0,.5);
+  border-right-color:rgba(0,0,0,.5);
+  -webkit-box-shadow: inset 0px 1px 0px rgba(255,255,255,.15), 0px 1px 3px rgba(0,0,0,.7);
+  -moz-box-shadow: inset 0px 1px 0px rgba(255,255,255,.15), 0px 1px 3px rgba(0,0,0,.7);
+  box-shadow: inset 0px 1px 0px rgba(255,255,255,.15), 0px 1px 3px rgba(0,0,0,.7);
+  background: -webkit-linear-gradient(top, rgba(72,73,76,0.9) 0%,rgba(57,58,60,0.9) 50%,rgba(50,51,53,0.9) 51%,rgba(38,39,40,0.9) 100%);
+  background: -moz-linear-gradient(top, rgba(72,73,76,0.9) 0%,rgba(57,58,60,0.9) 50%,rgba(50,51,53,0.9) 51%,rgba(38,39,40,0.9) 100%);
+  background: -o-linear-gradient(top, rgba(72,73,76,0.9) 0%,rgba(57,58,60,0.9) 50%,rgba(50,51,53,0.9) 51%,rgba(38,39,40,0.9) 100%);
+  background: -ms-linear-gradient(top, rgba(72,73,76,0.9) 0%,rgba(57,58,60,0.9) 50%,rgba(50,51,53,0.9) 51%,rgba(38,39,40,0.9) 100%);
+  background: linear-gradient(top, rgba(72,73,76,0.9) 0%,rgba(57,58,60,0.9) 50%,rgba(50,51,53,0.9) 51%,rgba(38,39,40,0.9) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e648494c', endColorstr='#e6262728',GradientType=0 );
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  border-radius:4px;
+ }
+ 
+ .nivo-caption p {
+  margin:0;
+  font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size:14px;
+  font-weight:bold;
+  color:#fff;
+  text-align:center;
+  text-shadow:0px -1px 0px #000;
+ }
+ 
+ .nivo-caption a {
+  display:inline !important;
+  }
+ 
+ .nivo-html-caption {
+  display:none;
+ }
+ 
+ .nivo-directionNav a {
+  position:absolute;
+  bottom:30px;
+  z-index:9;
+  cursor:pointer;
+  text-indent:-9999px;
+  width:45px;
+  height:39px;
+  background-image:url(http://4.bp.blogspot.com/-nVH_wLuXb7c/UB62lKkUv1I/AAAAAAAABVM/_FjJIm1wIrM/s1600/labstrike-arrows.png);
+  background-repeat:no-repeat;
+}
+ 
+ .nivo-prevNav {
+  left:75px;
+  background-position:0 0;
+  box-shadow: 1px 0px 0px rgba(255,255,255,.2), 2px 0px 0px rgba(0,0,0,.4);
+ }
+ 
+ .nivo-nextNav {
+  right:77px;
+  background-position:-45px 0px;
+  box-shadow: -1px 0px 0px rgba(255,255,255,.2), -2px 0px 0px rgba(0,0,0,.4);
+ }
+ 
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/ar">هلال لينُكس</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="/ar">الرئيسية</a></li>
+                           <li><a href="/ar/about.html">حول هلال</a></li>
+                            <li><a href="/ar/screenshots.html">لقطات</a></li>
+                            <li><a href="/ar/download.html">التحميل</a></li>
+                             <li><a href="/blog">المدونة</a></li>
+                             <li><a href="/wiki">الموسوعة</a></li>
+                             <li><a href="http://www.linuxac.org/forum/forums/110-%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%D8%A9-%D9%87%D9%84%D8%A7%D9%84-Helal-%D9%84%D9%8A%D9%86%D9%8F%D9%83%D8%B3-%D8%A7%D9%84%D8%B9%D9%80%D8%B1%D8%A8%D9%80%D9%8A%D9%80%D8%A9">المنتدى</a></li>
+                             <li><a href="http://webchat.freenode.net/?randomnick=0&channels=helal&prompt=1">قناة المحادثة IRC</a></li>
+<li><a href="http://helallinux-en.blogspot.com">English Site</a></li>
+                      
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            <div class="hero-unit">
+                <h1>.:هلال لينُكس:.</h1>
+
+<style>
+</style>  
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://www.code.helperblogger.com/jquery.nivo.slider.js"></script>
+<script type="text/javascript">
+    $(window).load(function () {
+        $('.nivoSlider').nivoSlider({
+            effect: 'sliceDown',
+            directionNavHide: false,
+            captionOpacity: 1,
+            controlNav: false
+        });
+    });
+</script>
+
+<p style="padding: 200px;">
+<div id="slider" class="nivoSlider">
+
+    <a href="http://www.linuxac.org/forum/threads/63403-%D8%AA%D8%A7%D8%A8%D8%B9-%D8%B9%D9%85%D9%84%D9%8A%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D9%87%D9%84%D8%A7%D9%84-%D9%84%D9%8A%D9%86%D9%8F%D9%83%D8%B3-4-0"><img src="http://img08.arabsh.com/uploads/image/2013/04/08/0c37474965f001.png"
+    alt="Slider Image 1" title="هلال لينُكس 4.0 قريباً"></a>
+  
+    <a href="/blog/?p=305"><img src="http://img06.arabsh.com/uploads/image/2013/04/08/0c37474965f704.png"
+    alt="Slider Image 2" title="هلال لينُكس 1.0 الخفيفة"></a>
+    <a href="/blog/?p=260"><img src="http://img07.arabsh.com/uploads/image/2013/04/08/0c37474965f702.png"
+    alt="Slider Image 2" title="هلال لينُكس 3.0 النهائية"></a>
+
+</div>
+</p>
+
+                <p>هلال لينُكس هي توزيعة لينُكس إسلامية عربية مبنية على توزيعة لينُكس أخرى تسمى Ubuntu, تتميز هلال بالخفة والجمال والسرعة واحتوائها على أهم التطبيقات التي قد تهم المستخدم العربي والمسلم, بالإضافة إلى برامجها وتخصيصاتها الخاصة التي لن تجد مثلها في نظام تشغيل آخر , وهي مجانية ومفتوحة المصدر بالكامل.</p>
+                <p><a class="btn btn-primary btn-large" href="/ar/about.html">استكشفها الآن &raquo;</a>
+                <a class="btn btn-primary btn-large" href="/ar/screenshots.html">اللقطات &raquo;</a>
+                <a class="btn btn-primary btn-large" href="/ar/download.html">التحميل &raquo;</a>
+                <a class="btn btn-primary btn-large" href="http://www.linuxac.org/forum/threads/63355-%D8%A5%D8%B7%D9%84%D8%A7%D9%82-%D9%85%D8%B3%D8%AA%D9%88%D8%AF%D8%B9-%D9%87%D9%84%D8%A7%D9%84-%D9%84%D9%8A%D9%86%D9%8F%D9%83%D8%B3-%D9%84%D8%A3%D9%88%D8%A8%D9%88%D9%86%D8%AA%D9%88-12-10-13-04">مستودع هلال &raquo;</a>
+    <a class="btn btn-primary btn-large" href="http://helallinux-en.blogspot.com">English Site &raquo;</a></p>
+            </div>
+
+            <!-- Example row of columns -->
+            <div class="row">
+
+                <div class="span4">
+
+
+
+                    <h2>آخر الأخبار</h2>
+
+	<ul>
+		
+		<li><a href="http://www.helallinux.com/blog/?p=366">صدور مستودع هلال لينُكس للأوبونتو 12.10/13.04</a></li>
+		<li><a href="http://www.helallinux.com/blog/?p=375">بدء العمل على هلال لينُكس 4.0</a></li>
+<li><a href="http://www.helallinux.com/blog/?p=370">إطلاق موقع هلال لينُكس الجديد</a></li>
+<li><a href="http://www.helallinux.com/blog/?p=305">إطلاق هلال لينُكس الخفيفة 1.0</a></li>
+<li><a href="http://www.helallinux.com/blog/?p=260">إطلاق هلال لينُكس النهائية 3.0</a></li>
+<li><a href="http://www.helallinux.com/blog/?p=93">هلال لينُكس تنضم إلى شبكة الإبتكار المفتوحة</a></li>
+
+	</ul>
+
+                <p><a class="btn btn-primary btn-large" href="https://helallinux.com/blog">مدونة هلال &raquo;</a></p>
+                </div>
+                <div class="span4">
+                    <h2>لماذا هلال؟</h2>
+<div class="icon">
+    <img src="http://rationalwiki.org/w/images/1/19/Question_icon.svg"
+    alt="Slider Image 2" title="Other opinion" width="48">
+</div>
+                    <p>لأن هلال مصممة بطريقة خاصة تضمن لك الإستمتاع بنظام تشغيلك إلى أقصى الحدود بلا كلل أو ملل, فضلاً عن احتوائها على العشرات من البرمجيات التي يتم تصنيفها إلى مجموعات منوعة تقدم لك أسهل الحلول للوصول إلى ما تريده , كالحزمة المكتبية "ليبر أوفيس" ومتصفح الوٍب الشهير "فيرفكس" وغيرها الكثير, وعلى عكس بعض التوزيعات الأخرى ففي هلال يمكنك الحصول على المساعدة في <a href="http://www.linuxac.org/forum/forums/110-%D8%AA%D9%88%D8%B2%D9%8A%D8%B9%D8%A9-%D9%87%D9%84%D8%A7%D9%84-Helal-%D9%84%D9%8A%D9%86%D9%8F%D9%83%D8%B3-%D8%A7%D9%84%D8%B9%D9%80%D8%B1%D8%A8%D9%80%D9%8A%D9%80%D8%A9">منتدى هلال</a> , أو طرح سؤال في <a href="http://ejabatlinux.com">إجابات لينُكس</a> , أو استخدام <a href="http://webchat.freenode.net/?randomnick=0&channels=helal&prompt=1">المحادثة عبر IRC</a>.</p>
+  <p><a class="btn btn-primary btn-large" href="/ar/about.html">تعلم المزيد &raquo;</a></p>
+               </div>
+                <div class="span4">
+                    <h2>حول هلال</h2>
+<div class="icon">
+    <img src="http://icons.iconarchive.com/icons/designbolts/religious-symbol/48/Islam-Crescent-icon.png"
+    alt="Slider Image 2" title="Other opinion">
+</div>
+                    <p>هلال لينُكس هي توزيعة لينُكس إسلامية عربية مبنية على توزيعة لينُكس أخرى تسمى <a href="http://ubuntu.com">Ubuntu</a>, تتميز هلال بالخفة والجمال والسرعة واحتوائها على أهم التطبيقات التي قد تهم المستخدم بالإضافة إلى برامجها وتخصيصاتها الخاصة التي لن تجد مثلها في نظام تشغيل آخر , وهي مجانية ومفتوحة المصدر بالكامل,, حالياً لدينا مستودع تطبيقاتنا الخاص ولدينا برامجنا الخاص وموقعنا الخاص<a href="http://www.designbolts.com">,</a> ونطمح إلى تطوير المزيد من المشاريع لإفادة المستخدم العربي والمسلم.</p>
+                <p><a class="btn btn-primary btn-large" href="/ar/about.html">تعلم المزيد &raquo;</a></p>
+                </div>
+            </div>
+
+            <hr>
+
+            <footer>
+                <p>&copy; هلال لينُكس 2013</p>
+            </footer>
+
+        </div> <!-- /container
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+ -->
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

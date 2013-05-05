@@ -1,0 +1,2 @@
+#!/bin/bash
+xgettext --keyword=_ -o dcc.pot $PWD/main.py 

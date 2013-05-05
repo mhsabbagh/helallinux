@@ -1,0 +1,7 @@
+[module]
+name = Software Updater
+name[ar] = محدثّ البرمجيات
+ico = full-update.svg
+desc = Update system software
+desc[ar] = تحديث برامج النظام
+command = update-manager

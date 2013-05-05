@@ -1,0 +1,7 @@
+[module]
+name = Software Center
+name[ar] = مركز البرمجيات
+ico = sc.svg
+desc = Install or upgrade a new software
+desc[ar] = تثبيت أو ترقية برمجيات جديدة
+command = software-center

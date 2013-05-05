@@ -1,0 +1,9 @@
+[module]
+name = New Wallpapers
+name[ar] = خلفيات جديدة
+ico = download.png
+desc = download new wallpapers from the internet
+desc[ar] = تحميل خلفيات جديدة من الإنترنت
+command = sensible-browser http://wallpaperswide.com/
+
+

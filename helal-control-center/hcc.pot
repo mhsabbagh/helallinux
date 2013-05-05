@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-24 08:21+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: /home/linuxer9/helal-control-center2-master/main.py:40
+msgid "helal GNU/Linux control center"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:77
+msgid "no modules found!"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:125
+msgid "System information"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:126
+msgid "This is a quick overview of your system.."
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:127
+msgid "Computer"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:128
+msgid "Operating system: "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:129
+msgid "Processor: "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:130
+msgid "Archticture: "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:131
+msgid "Ram: "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:132
+msgid "Devices"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:133
+msgid "Graphics card: "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:134
+msgid "Audio adapter: "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:135
+msgid "Ethernet: "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:136
+msgid "Misc"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:137
+msgid "Host name: "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:138
+msgid "Kernel: "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:139
+msgid "Desktop: "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:140
+msgid "Software & Packages"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:141
+msgid "Working with software, packages and sources.."
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:142
+msgid "Desktop"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:143
+msgid "Manage your desktop environment!"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:144
+msgid "System"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:145
+msgid "This is a set of useful tools for your system.."
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:146
+msgid "Hardware"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:147
+msgid "here you can use Hardware tools, install drivers..etc"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:148
+msgid "Other tools"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:149
+msgid "all other tools that aren't related to any of these categories.."
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:150
+msgid "forum"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:151
+msgid "help"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:152
+msgid "Useful applications"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:153
+msgid "here you can install some applications that are hard to setup..."
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:154
+msgid "Install GTK themes"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:155
+msgid "select the theme you want to install in tar.gz "
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:156
+msgid "Get new GTK themes !"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:157
+msgid "Browse"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:158
+msgid "install"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:159
+msgid "Install another Desktop environment"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:160
+msgid ""
+"here you can install another desktop environments ... select one to install"
+msgstr ""
+
+#: /home/linuxer9/helal-control-center2-master/main.py:175
+msgid "helal control center"
+msgstr ""

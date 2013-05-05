@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" >
+	<link media="all" rel="stylesheet" type="text/css" href="css/{css}.css" />
+	
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.main.js"></script>
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="content">
+			<div class="c1">
+
+				<div class="tabs">
+					<div id="tab-1" class="tab">
+						<article>
+							<div class="text-section">
+								<img id="solgan" src="icons/sys_info.png" />
+								<h1>{string_1}</h1>
+								<p>{string_2}</p>
+							</div>
+						</article>
+						<div id="contents">
+						<h1>{string_3}</h1>
+						<p>{string_4}<span id="ty">{os}</span></p>
+						<p>{string_5}<span id="ty">{processor}</span></p>
+						<p>{string_6}<span id="ty">{arc}</span></p>
+						<p>{string_7}<span id="ty">{mem}</span></p>
+						<h1>{string_8}</h1>
+						<p>{string_9}<span id="ty">{gfx}</span></p>
+						<p>{string_10}<span id="ty">{audio}</span></p>
+						<p>{string_11}<span id="ty">{eth}</span></p>
+						<h1>{string_12}</h1>
+						<p>{string_13}<span id="ty">{host}</span></p>
+						<p>{string_14}<span id="ty">{kernel}</span></p>
+						<p>{string_15}<span id="ty">{desk}</span></p>
+						<br>
+						<div class="link"><img src="images/forum.svg" ><p>{string_26}</p></div>
+						<div class="link"><img src="images/help.svg" ><p>{string_27}</p></div>
+						 
+						</div>
+					</div>
+					<div id="tab-2" class="tab">
+						<article>
+							<div class="text-section">
+								<img id="solgan" src="icons/packages.png" />
+								<h1>{string_16}</h1>
+								<p>{string_17}</p>
+								<img class="help" src="images/help.svg" >
+							</div>
+						</article>
+						<div id="contents">
+						{packs_list}
+						<br><br>					
+						<br>
+						<div id="box">
+						<div id="box_title">{string_28}</div>
+						<div id="box_content">
+						<p>{string_29} ...</p>
+						<div align="center">
+						<a href="#" class="tooltip" ><span>skype</span><img src="icons/skype.png"   ></a>
+						<a href="#" class="tooltip"><span>teamviewer</span><img src="icons/teamviewer.png"  ></a>
+						<a href="#" class="tooltip"><span>virtualbox</span><img src="icons/virtualbox.png"  ></a>
+						<a href="#" class="tooltip"><span>google earth</span><img src="icons/google-earth.png"  ></a>
+						</div>
+						
+						</div>
+						</div>
+						</div>
+						
+					</div>
+					<div id="tab-3" class="tab">
+						<article>
+							<div class="text-section">
+								<img id="solgan" src="icons/desktop.png" />
+								<h1>{string_18}</h1>
+								<p>{string_19}</p>
+								<img class="help" src="images/help.svg" >
+							</div>
+						</article>
+						<div id="contents">
+						{desktop_list}
+						<br><br>
+						<div id="box">
+						<div id="box_title">{string_30}</div>
+						<div id="box_content"><p>{string_31}</p>
+						<p><input class="input-box" id="file" size="40"> </input> <input onclick="changeTitle('theme_browse')" class="input-submit" type="submit" value="{string_33}"><input type="submit" value="{string_34}">
+						
+						<a href="#" >{string_32}</a></a>
+						</p>
+</div>				
+						</div>
+						<div id="box">
+						<div id="box_title">{string_35}</div>
+						<div id="box_content"><p>{string_36}</p>
+						<div align="center">					
+						<a href="#" class="tooltip"><span>KDE</span><img src="icons/kde.png" alt="KDE" ></a>
+						<a href="#" class="tooltip"><span>GNOME</span><img src="icons/gnome.png" alt="GNOME" ></a>	
+						<a href="#" class="tooltip"><span>xfce</span><img src="icons/xfce.png" alt="xfce" ></a>	
+						<a href="#" class="tooltip"><span>Compiz</span><img src="icons/compiz.png" alt="compix" ></a>	
+						<a href="#" class="tooltip"><span>LXDE</span><img src="icons/lxde.png" alt="LXDE" ></a>
+						</div>	
+						</div>
+						</div>
+						</div>
+					</div>
+					<div id="tab-4" class="tab">
+						<article>
+							<div class="text-section">
+								<img id="solgan" src="icons/system.png" />
+								<h1>{string_20}</h1>
+								<p>{string_21}</p>
+								<img class="help" src="images/help.svg" >
+							</div>
+						</article>
+						<div id="contents">
+						{system_list}
+						</div>
+					</div>
+					<div id="tab-5" class="tab">
+						<article>
+							<div class="text-section">
+								<img id="solgan" src="icons/hardware.png" />
+								<h1>{string_22}</h1>
+								<p>{string_23}</p>
+								<img class="help" src="images/help.svg" >
+							</div>
+						</article>
+						<div id="contents">
+						{hardware_list}
+						</div>
+					</div>
+					<div id="tab-6" class="tab">
+						<article>
+							<div class="text-section">
+								<img id="solgan" src="icons/other.png" />
+								<h1>{string_24}</h1>
+								<p>{string_25}</p>
+							</div>
+						</article>
+						<div id="contents">
+						{other_list}
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<aside id="sidebar">
+			<strong class="logo"><a onclick="changeTitle('about')" href="#"></a></strong>
+			<ul class="tabset buttons">
+				<li class="active">
+					<a href="#tab-1" class="ico1"><span>{string_1}</span><em></em></a>
+				</li>
+				<li>
+					<a href="#tab-2" class="ico2"><span>{string_16}</span><em></em></a>
+				</li>
+				<li>
+					<a href="#tab-3" class="ico3"><span>{string_18}</span><em></em></a>
+				</li>
+				<li>
+					<a href="#tab-4" class="ico4"><span>{string_20}</span><em></em></a>
+				</li>
+				<li>
+					<a href="#tab-5" class="ico5"><span>{string_22}</span><em></em></a>
+				</li>
+				<li>
+					<a href="#tab-6" class="ico6"><span>{string_24}</span><em></em></a>
+				</li>
+			</ul>
+			
+		</aside>
+	</div>
+<script type="text/javascript">
+function changeTitle(title) { document.title = title; document.title = 'none'; }
+</script>
+</body>
+</html>
