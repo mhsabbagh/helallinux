@@ -1,0 +1,10 @@
+
+gui2_lang=$(cat /home/$USER/.config/user-dirs.locale)
+echo $gui2_lang
+
+
+if [[ "$gui2_lang" == *ar* ]];then
+	/usr/bin/helal-wysiwyg-editor-ar
+else
+	/usr/bin/helal-wysiwyg-editor-en
+fi
