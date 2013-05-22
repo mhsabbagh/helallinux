@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=helal-recorder
+Name[ar]=مسجل هلال
+GenericName=Helal Recorder
+Name[ar]=مسجل هلال
+Comment=Record desktop using a simple GUI.
+Comment[ar]=تسجيل سطح المكتب باستخدام واجهة رسومية سهلة.
+Exec=/usr/bin/helal-recorder
+Terminal=no
+Type=Application
+StartupNotify=true
+Icon=/usr/share/pixmaps/helal-recorder.svg
+Categories=GNOME;AudioVideo;
+
+

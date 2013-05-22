@@ -1,0 +1,124 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Helal Recorder.
+# M.Hanny Sabbagh - 19/5/2013 <hannysabbagh@hotmail.com>.
+
+
+import gtk, webkit, os, subprocess
+
+class HelalRecorder(gtk.Window):
+  def __init__(self):
+    gtk.Window.__init__(self)
+    self.set_title("مسجل هلال")
+    self.connect("destroy", gtk.main_quit)
+    self.set_position(gtk.WIN_POS_CENTER)
+    self.set_opacity(0.5)
+    self.resize(400, 25)
+    self.filename = None
+    self.set_icon_from_file('/usr/share/pixmaps/helal-recorder.svg')
+
+    scroll = gtk.ScrolledWindow()
+    scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+
+    self.ui = self.generate_ui()
+    self.toolbar1 = self.ui.get_widget("/toolbar_main")
+
+    self.layout = gtk.VBox()
+    self.layout.pack_start(self.toolbar1, False)
+    self.add(self.layout)
+
+  def generate_ui(self):
+    ui_def = """
+    <ui>
+      <toolbar name="toolbar_main">
+        <toolitem action="record" />
+        <toolitem action="stop" />
+        <toolitem action="play" />
+        <separator />
+        <toolitem action="about" />
+        <toolitem action="home" />
+        <separator />
+        <toolitem action="quit" />
+      </toolbar>
+    </ui>
+    """
+
+    actions = gtk.ActionGroup("Actions")
+    actions.add_actions([
+
+      ("record", gtk.STOCK_MEDIA_RECORD, "_تسجيل", None, "تسجيل", self.on_record),
+      ("stop", gtk.STOCK_MEDIA_STOP, "_إيقاف", None, "إيقاف", self.on_stop),
+      ("play", gtk.STOCK_MEDIA_PLAY, "_تشغيل", None, "تشغيل", self.on_play),
+      ("home", gtk.STOCK_HOME, "_الموقع", None, "خروج", self.on_home),
+      ("about", gtk.STOCK_ABOUT, "_اخرج", None, "خروج", self.on_about),
+      ("quit", gtk.STOCK_CLOSE, "_اخرج", None, "خروج", self.on_quit),
+
+    ])
+
+    ui = gtk.UIManager()
+    ui.insert_action_group(actions)
+    ui.add_ui_from_string(ui_def)
+    return ui
+
+  def on_about(self, action):
+		about = gtk.AboutDialog()
+   		about.set_opacity(0.5)
+        	about.set_program_name("مسجل هلال")
+        	about.set_version("1.0.3")
+        	about.set_license('''This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301, USA. ''')
+		about.set_authors(["<hannysabbagh@hotmail.com> محمد هاني صباغ "])
+        	about.set_comments(("مسجل هلال يمكنه التسجيل بالصيغ التالية: mkv,flv,avi,nut, عند التسجيل اكتب اسم الملف مثلًا: test.mkv"))
+        	about.set_website("http://helallinux.com/")
+        	about.set_logo(gtk.gdk.pixbuf_new_from_file("/usr/share/pixmaps/helal-recorder.svg"))
+		about.set_icon_from_file('/usr/share/pixmaps/helal-recorder.svg')
+        	about.run()
+        	about.destroy()
+
+  def on_home(self, action):
+    os.system('sensible-browser http://helallinux.com')
+
+
+  def on_paste(self, action):
+    self.editor.paste_clipboard()
+
+  def on_quit(self, action):
+    self.window.destroy()
+
+  def on_record(self, action):
+    dialog = gtk.Dialog("أدخل اسم الملف:", self, 0,
+      (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OK, gtk.RESPONSE_OK))
+
+    entry = gtk.Entry()
+    dialog.vbox.pack_start(entry)
+    dialog.show_all()
+
+    if dialog.run() == gtk.RESPONSE_OK:
+      os.system('export vblank_mode=0')
+      os.system(
+        "avconv -f x11grab -video_size `xdpyinfo | grep 'dimensions:'|awk '{print $2}'` -framerate 160 -i :0.0 -threads 2 -q 1 -bt 8000000 -b 8500000 /home/$USER/helal-recorder/'%s' &" % entry.get_text())
+    os.environ["filename"] = entry.get_text()
+    dialog.destroy()
+
+  def on_stop(self, action):
+    os.system('killall avconv')
+
+  def on_play(self, action):
+    os.system("mplayer /home/$USER/helal-recorder/$filename")
+  
+
+e = HelalRecorder()
+e.show_all()
+gtk.main()
