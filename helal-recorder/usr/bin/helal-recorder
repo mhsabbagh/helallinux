@@ -1,10 +1,674 @@
-
+#!/bin/sh
+videos=$(cat /home/$USER/.config/user-dirs.dirs|grep XDG_VIDEOS_DIR|awk -F"/" '{print $2}'|awk -F'"' '{print $1}')
 gui2_lang=$(cat /home/$USER/.config/user-dirs.locale)
-echo $gui2_lang
 
 
 if [[ "$gui2_lang" == *ar* ]];then
-	/usr/bin/helal-recorder-ar
+	export vblank_mode=0
+mkdir /home/$USER/Helal-recorder
+GTKDIALOG=gtkdialog
+display=$(xdpyinfo | grep 'dimensions:'|awk '{print $2}')
+export MAIN_DIALOG='
+
+
+<window title="مسجل هلال" icon-name="gtk-media-record" resizable="true" width-request="500" height-request="340"  border-width="3">
+
+
+<notebook tab-labels="تسجيل فيديو|فيديو وصوت|صوت فقط" page="00" tab-hborder="10" tab-vborder="40" tab-pos="0" >
+
+
+   <vbox>
+
+	<pixmap>
+        <width>128</width>
+        <input file>'"/usr/share/pixmaps/helal-recorder.svg"'</input>
+        </pixmap>
+
+<frame إعدادات:>
+
+	<text><label>هنا يمكنك فقط تسجيل سطح المكتب كفيديو:</label></text>
+   	<hbox>
+      	        <entry accept="directory">
+        	  <label>اختر مسارًا</label>
+		  <default>/home/'$USER'/'$videos'</default>
+        	  <variable>FILE_DIRECTORY</variable>
+      		 </entry>
+
+      		<button>
+        	  <input file stock="gtk-open"></input>
+ 
+        	  <action type="fileselect">FILE_DIRECTORY</action>
+      		</button>
+
+		<entry>
+			<default>تسجيلٌ_هلاليّ</default>
+			<variable>name</variable>
+		</entry>
+
+   	</hbox>
+
+	<text><label>الصيغة:</label></text>
+	<comboboxtext fs-action="file" focus-on-click="false">
+	<item>.avi</item>
+	<item>.flv</item>
+	<item>.nut</item>
+	<item>.mkv</item>
+        <variable>extn</variable>
+	</comboboxtext>
+ 
+
+
+
+  </frame>
+
+<hbox>
+
+
+
+
+
+		<button use-stock="true" image-position="1" relief="1" auto-refresh="true">
+		<width>32</width>
+		<input file>"/usr/share/helal-recorder/images/gtk-media-record.png"</input>
+
+                <variable>record1</variable>
+		<action>rm $FILE_DIRECTORY/$name$extn</action>
+		<action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "يقوم مسجل هلال" "الآن بعملية التسجيل."</action>
+		<action type="disable">record1</action>
+		<action>avconv -f x11grab -video_size '$display' -framerate 160 -i :0.0 -threads 2 -q 1 -bt 8000000 -b 8500000 $FILE_DIRECTORY/$name$extn &</action>
+
+
+		</button>  
+
+  		<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+	<input file>"/usr/share/helal-recorder/images/gtk-media-stop.png"</input>
+	<action>killall avconv</action>
+	<action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "قام مسجل هلال" "بإيقاف بعملية التسجيل."</action>
+	<action type="enable">record1</action>
+	</button>
+
+		<button use-stock="true" image-position="1" relief="1" auto-refresh="true">
+		<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-media-play-ltr.png"</input>
+
+		<action>mplayer $FILE_DIRECTORY/$name$extn</action>
+		<action>echo $extn</action>
+		</button>
+
+
+
+
+	<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-info.png"</input>
+	<action type="launch">About</action>
+	</button>
+
+		
+</hbox>
+   </vbox>
+
+<vbox>
+
+
+	<pixmap>
+        <width>128</width>
+<input file>'"/usr/share/pixmaps/helal-recorder.svg"'</input>
+        </pixmap>
+
+
+<frame إعدادات:>
+
+	<text><label>هنا يمكنك القيام بتسجيل سطح المكتب كفيديو وصوت:</label></text>
+   	<hbox>
+      	        <entry accept="directory">
+        	  <label>اختر مسارًا</label>
+		  <default>/home/'$USER'/'$videos'</default>
+        	  <variable>FILE_DIRECTOR</variable>
+      		 </entry>
+
+      		<button>
+        	  <input file stock="gtk-open"></input>
+ 
+        	  <action type="fileselect">FILE_DIRECTOR</action>
+      		</button>
+
+		<entry>
+						<default>helalrecorder</default>
+			<variable>namee</variable>
+		</entry>
+
+   	</hbox>
+
+	<text><label>الصيغة:</label></text>
+	<comboboxtext fs-action="file" focus-on-click="false">
+	<item>.avi</item>
+	<item>.nut</item>
+        <variable>extns</variable>
+	</comboboxtext>
+
+ 
+
+	
+
+
+
+  </frame>
+<hbox>
+
+
+
+
+		<button use-stock="true" image-position="1" relief="1" auto-refresh="true">
+		<width>32</width>
+		<input file>"/usr/share/helal-recorder/images/gtk-media-record.png"</input>
+                <variable>record2</variable>
+		<action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "يقوم مسجل هلال" "الآن بعملية التسجيل."</action>
+		<action type="disable">record2</action>
+		<action>rm $FILE_DIRECTOR/$namee$extns</action>
+		<action>avconv -f alsa -i pulse -f x11grab -video_size '$display' -framerate 160 -i :0.0 -threads 4 -q 1 -bt 8000000 -b 8500000 $FILE_DIRECTOR/$namee$extns &</action>
+		</button>  
+
+ 	<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+	<input file>"/usr/share/helal-recorder/images/gtk-media-stop.png"</input>
+<action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "قام مسجل هلال" "بإيقاف بعملية التسجيل."</action>
+	<action>killall avconv</action>
+	<action type="enable">record2</action>
+	</button>
+
+		<button use-stock="true" image-position="1" relief="1" auto-refresh="true">
+		<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-media-play-ltr.png"</input>
+
+		<action>mplayer $FILE_DIRECTOR/$namee$extns</action>
+		<action>echo $extn</action>
+		</button>
+
+
+
+	<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-info.png"</input>
+
+	<action type="launch">About</action>
+	</button>
+
+</hbox>
+</vbox>
+
+<vbox>
+
+
+	<pixmap>
+        <width>128</width>
+<input file>'"/usr/share/pixmaps/helal-recorder.svg"'</input>
+        </pixmap>
+
+
+<frame إعدادات:>
+
+	<text><label>هنا يمكنك القيام فقط بتسجيل الصوت دون فيديو:</label></text>
+   	<hbox>
+      	        <entry accept="directory">
+        	  <label>اختر مسارًا</label>
+		  <default>/home/'$USER'/'$videos'</default>
+        	  <variable>FILE_DIRECTORYY</variable>
+      		 </entry>
+
+      		<button>
+        	  <input file stock="gtk-open"></input>
+        	  <action type="fileselect">FILE_DIRECTORYY</action>
+      		</button>
+
+		<entry>
+						<default>helalrecorder</default>
+			<variable>nam</variable>
+		</entry>
+
+   	</hbox>
+	<text><label>الصيغة:</label></text>
+	<comboboxtext fs-action="file" focus-on-click="false">
+	<item>.avi</item>
+	<item>.wav</item>
+	<item>.mp3</item>
+	<item>.mp4</item>
+	<item>.dvd</item>
+	<item>.flac</item>
+	<item>.ogg</item>
+	<item>.nut</item>
+        <variable>ext</variable>
+	</comboboxtext>
+
+
+  </frame>
+
+<hbox>
+
+
+
+
+
+
+		<button use-stock="true" image-position="1" relief="1" auto-refresh="true">
+		<width>32</width>
+		<input file>"/usr/share/helal-recorder/images/gtk-media-record.png"</input>
+
+                <variable>record3</variable>
+		<action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "يقوم مسجل هلال" "الآن بعملية التسجيل."</action>
+<action>rm $FILE_DIRECTORYY/$nam$ext</action>
+		<action>avconv -f alsa -i default $FILE_DIRECTORYY/$nam$ext &</action>
+		<action type="disable">record3</action>
+		</button>  
+
+  	<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+	<input file>"/usr/share/helal-recorder/images/gtk-media-stop.png"</input>
+<action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "قام مسجل هلال" "بإيقاف بعملية التسجيل."</action>
+	<action>killall avconv</action>
+	<action type="enable">record3</action>
+	</button>
+
+		<button use-stock="true" image-position="1" relief="1">
+		<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-media-play-ltr.png"</input>
+
+		<action>mplayer $FILE_DIRECTORYY/$nam$ext</action>
+		</button>
+
+
+
+
+	<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-info.png"</input>
+
+	<action type="launch">About</action>
+	</button>
+
+
+</hbox>
+
+</vbox>
+
+</notebook>
+
+
+
+
+</window>
+'
+
+export About='
+<window title="حول" icon-name="gtk-about" resizable="true" width-request="420" height-request="240"  border-width="3">
+   <vbox>	
+
+	<pixmap>
+        <width>128</width>
+<input file>'"/usr/share/pixmaps/helal-recorder.svg"'</input>
+        </pixmap>
+
+<text>
+<label>مسجل هلال 1.0 هو برنامج رسومي صغير لتسجيل سطح المكتب، تم برمجته بواسطة محمد هاني صباغ hannysabbagh@hotmail.com وهو مرخص تحت GPL 3.</label>
+
+</text>
+
+<hbox>
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>32</width>
+		<input file icon="emblem-web"></input>
+		<label>الموقع</label>
+		<action>sensible-browser http://helallinux.com</action>
+	</button> 
+</hbox>
+
+   </vbox>
+
+</window>
+'
+
+case $1 in
+	-d | --dump) echo "$MAIN_DIALOG" ;;
+	*) $GTKDIALOG --program=MAIN_DIALOG --center ;;
+esac
+
 else
-	/usr/bin/helal-recorder-en
+	export vblank_mode=0
+mkdir /home/$USER/Helal-recorder
+GTKDIALOG=gtkdialog
+display=$(xdpyinfo | grep 'dimensions:'|awk '{print $2}')
+export MAIN_DIALOG='
+
+
+<window title="Helal Recorder" icon-name="gtk-media-record" resizable="true" width-request="500" height-request="340" border-width="3">
+
+
+<notebook tab-labels="Video|Video and Audio|Audio" page="00" tab-hborder="5" tab-vborder="40" tab-pos="0" >
+
+   <vbox>
+
+	<pixmap>
+        <width>128</width>
+<input file>'"/usr/share/pixmaps/helal-recorder.svg"'</input>
+        </pixmap>
+
+<frame Settings>
+
+	<text><label>Here you can ONLY record video:</label></text>
+   	<hbox>
+      	        <entry accept="directory">
+        	  <label>Select a Directory</label>
+		  <default>/home/'$USER'/'$videos'</default>
+        	  <variable>FILE_DIRECTORY</variable>
+      		 </entry>
+
+      		<button>
+        	  <input file stock="gtk-open"></input>
+ 
+        	  <action type="fileselect">FILE_DIRECTORY</action>
+      		</button>
+
+		<entry>
+			<default>helalian_record</default>
+			<variable>name</variable>
+		</entry>
+
+   	</hbox>
+
+ 
+
+	<text><label>Type:</label></text>
+	<comboboxtext fs-action="file" focus-on-click="false">
+	<item>.avi</item>
+	<item>.flv</item>
+	<item>.nut</item>
+	<item>.mkv</item>
+        <variable>extn</variable>
+	</comboboxtext>
+ 
+
+
+
+  </frame>
+
+<hbox>
+
+
+
+
+
+		<button use-stock="true" image-position="1" relief="1" auto-refresh="true">
+		<width>32</width>
+		<input file>"/usr/share/helal-recorder/images/gtk-media-record.png"</input>
+ 
+                <variable>record1</variable>
+	        <action>rm $FILE_DIRECTORY/$name$extn</action>
+		<action type="disable">record1</action>
+<action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "Helal Recorder is" "now recording the desktop."</action>
+		<action>avconv -f x11grab -video_size '$display' -framerate 160 -i :0.0 -threads 2 -q 1 -bt 8000000 -b 8500000 $FILE_DIRECTORY/$name$extn &</action>
+
+
+		</button>  
+
+  		<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+	<input file>"/usr/share/helal-recorder/images/gtk-media-stop.png"</input>
+ <action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "Helal Recorder" "is now stopped."</action>
+	<action>killall avconv</action>
+	<action type="enable">record1</action>
+	</button>
+
+		<button use-stock="true" image-position="1" relief="1" auto-refresh="true">
+		<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-media-play-ltr.png"</input>
+ 
+		<action>mplayer $FILE_DIRECTORY/$name$extn</action>
+		<action>echo $extn</action>
+		</button>
+
+
+	<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-info.png"</input>
+ 
+	<action type="launch">About</action>
+	</button>
+
+		
+</hbox>
+   </vbox>
+
+<vbox>
+
+
+	<pixmap>
+        <width>128</width>
+<input file>'"/usr/share/pixmaps/helal-recorder.svg"'</input>
+        </pixmap>
+
+
+<frame Settings>
+
+	<text><label>Here you can record video and audio:</label></text>
+   	<hbox>
+      	        <entry accept="directory">
+        	  <label>Select a Directory</label>
+		  <default>/home/'$USER'/'$videos'</default>
+        	  <variable>FILE_DIRECTOR</variable>
+      		 </entry>
+
+      		<button>
+        	  <input file stock="gtk-open"></input>
+ 
+        	  <action type="fileselect">FILE_DIRECTOR</action>
+      		</button>
+
+		<entry>
+			<default>helalrecorder</default>
+			<variable>namee</variable>
+		</entry>
+
+   	</hbox>
+
+
+	<text><label>Type:</label></text>
+	<comboboxtext fs-action="file" focus-on-click="false">
+	<item>.avi</item>
+	<item>.nut</item>
+        <variable>extns</variable>
+	</comboboxtext>
+
+ 
+
+	
+
+
+
+  </frame>
+<hbox>
+
+
+
+
+		<button use-stock="true" image-position="1" relief="1" auto-refresh="true">
+		<width>32</width>
+		<input file>"/usr/share/helal-recorder/images/gtk-media-record.png"</input>
+ 
+                <variable>record2</variable>
+		<action>rm $FILE_DIRECTOR/$namee$extns</action>
+		<action type="disable">record2</action>
+<action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "Helal Recorder is" "now recording the desktop."</action>
+		<action>avconv -f alsa -i pulse -f x11grab -video_size '$display' -framerate 160 -i :0.0 -threads 4 -q 1 -bt 8000000 -b 8500000 $FILE_DIRECTOR/$namee$extns &</action>
+		</button>  
+
+ 	<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+	<input file>"/usr/share/helal-recorder/images/gtk-media-stop.png"</input>
+ <action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "Helal Recorder" "is now stopped."</action>
+	<action>killall avconv</action>
+	<action type="enable">record2</action>
+	</button>
+
+		<button use-stock="true" image-position="1" relief="1" auto-refresh="true">
+		<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-media-play-ltr.png"</input>
+ 
+		<action>mplayer $FILE_DIRECTOR/$namee$extns</action>
+		<action>echo $extn</action>
+		</button>
+
+
+ 
+
+	<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-info.png"</input>
+ 
+	<action type="launch">About</action>
+	</button>
+
+</hbox>
+</vbox>
+
+<vbox>
+
+
+	<pixmap>
+        <width>128</width>
+<input file>'"/usr/share/pixmaps/helal-recorder.svg"'</input>
+        </pixmap>
+
+
+<frame Settings>
+
+	<text><label>Here you can ONLY record audio:</label></text>
+   	<hbox>
+      	        <entry accept="directory">
+        	  <label>Select a Directory</label>
+		  <default>/home/'$USER'/'$videos'</default>
+        	  <variable>FILE_DIRECTORYY</variable>
+      		 </entry>
+
+      		<button>
+        	  <input file stock="gtk-open"></input>
+        	  <action type="fileselect">FILE_DIRECTORYY</action>
+      		</button>
+
+		<entry>
+			<default>helalrecorder</default>
+			<variable>nam</variable>
+		</entry>
+
+   	</hbox>
+	<text><label>Type:</label></text>
+	<comboboxtext fs-action="file" focus-on-click="false">
+	<item>.avi</item>
+	<item>.wav</item>
+	<item>.mp3</item>
+	<item>.mp4</item>
+	<item>.dvd</item>
+	<item>.flac</item>
+	<item>.ogg</item>
+	<item>.nut</item>
+        <variable>ext</variable>
+	</comboboxtext>
+
+
+  </frame>
+
+<hbox>
+
+
+
+
+
+
+		<button use-stock="true" image-position="1" relief="1" auto-refresh="true">
+		<width>32</width>
+		<input file>"/usr/share/helal-recorder/images/gtk-media-record.png"</input>
+ 
+                <variable>record3</variable>
+		<action>rm $FILE_DIRECTORYY/$nam$ext</action>
+		<action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "Helal Recorder is" "now recording the desktop."</action>
+		<action>avconv -f alsa -i default $FILE_DIRECTORYY/$nam$ext &</action>
+		<action type="disable">record3</action>
+		</button>  
+
+  	<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+	<input file>"/usr/share/helal-recorder/images/gtk-media-stop.png"</input>
+ <action>notify-send --icon=/usr/share/pixmaps/helal-recorder.svg "Helal Recorder" "is now stopped."</action>
+	<action>killall avconv</action>
+	<action type="enable">record3</action>
+	</button>
+
+		<button use-stock="true" image-position="1" relief="1">
+		<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-media-play-ltr.png"</input>
+ 
+		<action>mplayer $FILE_DIRECTORYY/$nam$ext</action>
+		</button>
+
+
+
+
+
+	<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+<input file>"/usr/share/helal-recorder/images/gtk-info.png"</input>
+ 
+	<action type="launch">About</action>
+	</button>
+
+
+</hbox>
+
+</vbox>
+
+</notebook>
+
+
+
+
+</window>
+'
+
+
+export About='
+<window title="About" icon-name="gtk-about" resizable="true" width-request="420" height-request="250"  border-width="3">
+   <vbox>	
+
+	<pixmap>
+        <width>128</width>
+<input file>'"/usr/share/pixmaps/helal-recorder.svg"'</input>
+        </pixmap>
+
+<text>
+<label>Helal Recorder 1.0 is a gtk-recorder for Helal Linux, programmed by "M.Hanny Sabbagh" hannysabbagh@hotmail.com it is licensed under GPL 3. </label>
+
+</text>
+
+<hbox>
+
+
+		
+	<button use-stock="true" image-position="1" relief="1">
+		<width>32</width>
+		<input file icon="emblem-web"></input>
+		<label>Website</label>
+		<action>sensible-browser http://helallinux.com</action>
+		</button> </hbox>
+   </vbox>
+
+</window>
+'
+
+
+case $1 in
+	-d | --dump) echo "$MAIN_DIALOG" ;;
+	*) $GTKDIALOG --program=MAIN_DIALOG --center ;;
+esac
+
 fi

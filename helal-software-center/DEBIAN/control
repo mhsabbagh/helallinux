@@ -1,0 +1,9 @@
+Package: helal-software-center
+Version: 1.1
+Maintainer: hannysabbagh <hannysabbagh@hotmail.com>
+Architecture: all
+Depends: python (>= 2.4), python (<< 3), python-gtk2, python-glade2, python-webkit, python-imaging, python-sexy, libgtk2-perl
+Section: Others
+Priority: optional
+Description: Helal Software Center
+ A software Center to easily install new applications.

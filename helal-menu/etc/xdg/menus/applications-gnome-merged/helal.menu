@@ -1,0 +1,20 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+"http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+
+<Menu>
+  <Name>Applications</Name>
+  <Menu>
+    <Name>Helal Linux</Name>
+    <Directory>helallinux.directory</Directory>
+    <Include>
+      <And>
+        <Category>helallinux</Category>
+      </And>
+    </Include>
+    <DefaultLayout inline="true" inline_limit="2" inline_header="false">
+      <Merge type="menus"/>
+      <Merge type="files"/>
+    </DefaultLayout>
+   
+  </Menu>
+</Menu> 

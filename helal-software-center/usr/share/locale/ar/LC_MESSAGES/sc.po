@@ -1,0 +1,488 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: linuxmint\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-04-26 15:37+0100\n"
+"PO-Revision-Date: 2013-06-24 07:37+0200\n"
+"Last-Translator: Mojtaba <Unknown>\n"
+"Language-Team: Arabic <ar@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-04-29 10:03+0000\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "%(downloadSize)s to download, %(localSize)s of disk space freed"
+msgstr "%(downloadSize)s ليتم تحميله, %(localSize)s ليتم إفراغه"
+
+msgid "%(downloadSize)s to download, %(localSize)s of disk space required"
+msgstr "%(downloadSize)s ليتم تحميله، %(localSize)s سيتم استخدامها"
+
+msgid "%(localSize)s of disk space freed"
+msgstr "%(localSize)s من مساحة القرص سيتم إفراغها."
+
+msgid "%(localSize)s of disk space required"
+msgstr "%(localSize)s من مساحة القرص مطلوبة."
+
+msgid "%d ongoing actions"
+msgstr "عمليات جارية %d"
+
+msgid "%d packages"
+msgstr "%d حزمة"
+
+msgid "%d packages are currently available"
+msgstr "%d حزمة متوفرة حالياً"
+
+msgid "%d reviews"
+msgstr "%d تعليق"
+
+msgid "%s (installed)"
+msgstr "%s (ثُبِّت)"
+
+msgid "%s (removed)"
+msgstr "%s (أُزيل)"
+
+msgid "%s (running in the background)"
+msgstr "(جاري في الخلفية) %s"
+
+msgid "3D"
+msgstr "ثلاثي الأبعاد"
+
+msgid "About"
+msgstr "حول"
+
+msgid "Accessories"
+msgstr "الملحقات"
+
+msgid "Account information"
+msgstr "بيانات الحساب"
+
+msgid "Active tasks:"
+msgstr "المهام النشطة :"
+
+msgid "Adding repository"
+msgstr "إضافة مستودع"
+
+msgid "Adding vendor key file"
+msgstr "اضافة مفتاح الثقة"
+
+msgid "Adding vendor key from keyserver"
+msgstr "أضف مفتاح مانح من خادم المفتاح"
+
+msgid "All Packages"
+msgstr "كل الحزم"
+
+msgid "Application"
+msgstr "التطبيق"
+
+msgid "Application removed successfully"
+msgstr "تم إزالة التطبيق بنجاح"
+
+msgid "Available packages"
+msgstr "الحزم المتاحة"
+
+msgid "Awesome!"
+msgstr "ممتاز"
+
+msgid "B"
+msgstr "بت"
+
+msgid "Backing up your APT sources"
+msgstr "يتم عمل نسخه من مصادر (apt)"
+
+msgid "Board games"
+msgstr "ألعاب تقليدية"
+
+msgid "Cancel the task: %s"
+msgstr "الغاء العملية: %s"
+
+msgid "Cancelling"
+msgstr "جاري الإلغاء"
+
+msgid "Categories"
+msgstr "الأقسام"
+
+msgid "Chat"
+msgstr "دردشة"
+
+msgid "Cleaning up"
+msgstr "جاري التنظيف"
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "Committing"
+msgstr "جاري التأكيد"
+
+msgid "Committing package"
+msgstr "جاري التأكد من الحزمة"
+
+msgid "Could not find package: %s"
+msgstr "لا يمكن ايجاد الحزمة : %s"
+
+msgid "Default repositories"
+msgstr "المستودعات الإفتراضية"
+
+msgid "Description"
+msgstr "الوصف"
+
+msgid "Details"
+msgstr "تفاصيل"
+
+msgid "Downloading"
+msgstr "جاري التحميل"
+
+msgid "Drawing"
+msgstr "رسم"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Emulators"
+msgstr "محاكيات"
+
+msgid "Islamic"
+msgstr "إسلاميات"
+
+msgid "Enabling distribution component"
+msgstr "تفعيل مكون توزيعة"
+
+msgid "Featured"
+msgstr "مميز"
+
+msgid "File sharing"
+msgstr "مشاركة الملفات"
+
+msgid "Fill in your account info to review applications"
+msgstr "املأ بيانات حسابك لتتمكن من التعليق على التطبيقات"
+
+msgid "Find Software"
+msgstr "بحث عن برنامج"
+
+msgid "Finished"
+msgstr "إنتهى"
+
+msgid "First-person shooters"
+msgstr "ألعاب اطلاق النار"
+
+msgid "Fixing broken dependencies"
+msgstr "إصلاح الإعتماديات المعطوبة"
+
+msgid "Fixing incomplete installations"
+msgstr "إصلاح التنزيلات غير المكتملة"
+
+msgid "Fonts"
+msgstr "الخطوط"
+
+msgid "GB"
+msgstr "ج.ب."
+
+msgid "Games"
+msgstr "الألعاب"
+
+msgid "Gathering information for %d packages..."
+msgstr "جارٍ جمع بيانات %d حزمة..."
+
+msgid "Go to the GetDeb Portal"
+msgstr "اذهب إلى بوابة جِت دِب (GetDeb)"
+
+msgid "Go to the Linux Mint Software Portal"
+msgstr "اذهب إلى بوابة لينكس منت للبرامج"
+
+msgid "Go to the Linux Mint repository"
+msgstr "اذهب إلى مستودع لينكس منت"
+
+msgid "Go to the Ubuntu repository"
+msgstr "اذهب إلى مستودع اوبنتو"
+
+msgid "Graphics"
+msgstr "الرسوميات"
+
+msgid "Hate it"
+msgstr "سيئ"
+
+msgid "Icon"
+msgstr "الأيقونة"
+
+msgid "Impact on packages:"
+msgstr "التأثير على الحزم:"
+
+msgid "Install"
+msgstr "تثبيت"
+
+msgid "Install %s?"
+msgstr "تثبيت %s ؟"
+
+msgid "Install new applications"
+msgstr "تثبيت برامج جديدة"
+
+msgid "Installation is complete"
+msgstr "عملية التثبيت انتهت"
+
+msgid "Installed"
+msgstr "تم التثبيت"
+
+msgid "Installed packages"
+msgstr "حزم مُثبّتة"
+
+msgid "Installing file"
+msgstr "جاري تثبيت الملف"
+
+msgid "Installing package"
+msgstr "جاري تثبيت الحزمة"
+
+msgid "Internet"
+msgstr "الإنترنت"
+
+msgid "KB"
+msgstr "ك.ب."
+
+msgid "Like it"
+msgstr "جيد"
+
+msgid "Loading cache"
+msgstr "تحميل الملفات المؤقتة"
+
+msgid "MB"
+msgstr "م.ب."
+
+msgid "No ongoing actions"
+msgstr "لا عمليات جارية"
+
+msgid "No results"
+msgstr "لا توجد نتائج"
+
+msgid "No role set"
+msgstr "لم يتم ضبط أي خيار"
+
+msgid "Not a fan"
+msgstr "ضعيف"
+
+msgid "Not installed"
+msgstr "غير مثبت"
+
+msgid "Office"
+msgstr "مكتب"
+
+msgid "Open links using the web browser"
+msgstr "فتح الروابط باستخدام متصفح الانترنت"
+
+msgid "Package"
+msgstr "الحزمة"
+
+msgid "Password:"
+msgstr "كلمة السر :"
+
+msgid "Photography"
+msgstr "التحكم بالصور"
+
+msgid "Please choose a category"
+msgstr "فضلاً اختر تصنيف"
+
+msgid "Please choose a sub-category"
+msgstr "فضلاً اختر تصنيف فرعي"
+
+msgid "Please wait, this can take some time"
+msgstr "الرجاء الإنتظار، قد يتطلب هذا بعض الوقت"
+
+msgid "Preferences"
+msgstr "التفضيلات"
+
+msgid "Programming"
+msgstr "البرمجة"
+
+msgid "Progress"
+msgstr "مستوى التقدم"
+
+msgid "Publishing"
+msgstr "النشر"
+
+msgid "Real-time strategy"
+msgstr "ألعاب استراتيجية"
+
+msgid "Remove"
+msgstr "ازالة"
+
+msgid "Remove %s?"
+msgstr "إزالة %s؟"
+
+msgid "Removing package"
+msgstr "جاري ازالة الحزمة"
+
+msgid "Removing vendor key"
+msgstr "ازالة مفتاح الثقة"
+
+msgid "Resolving dependencies"
+msgstr "جاري ضبط الاعتماديات"
+
+msgid "Restoring your APT sources"
+msgstr "مصادر APT في طور الاستعادة"
+
+msgid "Reviews"
+msgstr "مراجعات"
+
+msgid "Reviews:"
+msgstr "تعليقات:"
+
+msgid "Running"
+msgstr "قيد التشغيل"
+
+msgid "Scanning"
+msgstr "مسح ضوئي"
+
+msgid "Education"
+msgstr "تعليم"
+
+msgid "Score"
+msgstr "الرتبه"
+
+msgid "Score:"
+msgstr "المستوى:"
+
+msgid "Screenshot"
+msgstr "صورة للبرنامج"
+
+msgid "Search"
+msgstr "البحث"
+
+msgid "Search for a .deb package"
+msgstr "ابحث عن حزمة .deb"
+
+msgid "Search for a .mint application"
+msgstr "ابحث عن برنامج بامتداد mint."
+
+msgid "Search in packages description (even slower search)"
+msgstr "بحث في تفاصيل الحزم (بحث أكثر بطئ)"
+
+msgid "Search in packages summary (slower search)"
+msgstr "بحث في بيانات الحزم (بحث بطئ)"
+
+msgid "Search results"
+msgstr "نتائج البحث"
+
+msgid "See more reviews"
+msgstr "مشاهدة تقارير اضافية"
+
+msgid "Setting up"
+msgstr "جاري التثبيت"
+
+msgid "Show"
+msgstr "عرض"
+
+msgid "Simulation and racing"
+msgstr "ألعاب المحاكاة و السباقات"
+
+msgid "Size:"
+msgstr "الحجم:"
+
+msgid "So so"
+msgstr "متوسط"
+
+msgid "Software Manager"
+msgstr "مدير التطبيقات"
+
+msgid "Software sources"
+msgstr "مصادر البرامج"
+
+msgid "Sound and video"
+msgstr "صوت و فيديو"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Submit"
+msgstr "أرسل"
+
+msgid "System tools"
+msgstr "أدوات النظام"
+
+msgid "Task"
+msgstr "مَهمة"
+
+msgid "The following packages will be installed:"
+msgstr "سيتم تنصيب الحزم التالية:"
+
+msgid "The following packages will be removed:"
+msgstr "سيتم إزالة الحزم التالية :"
+
+msgid "The following packages will be upgraded:"
+msgstr "ستتم ترقية الحزم التالية:"
+
+msgid "Turn-based strategy"
+msgstr "العاب استراتيجية الادوار"
+
+msgid "Updating cache"
+msgstr "جاري تحديث الملفات المؤقتة"
+
+msgid "Upgrade"
+msgstr "ترقية"
+
+msgid "Upgrade %s?"
+msgstr "ترقية %s ؟"
+
+msgid "Upgrading package"
+msgstr "جاري ترقية الحزمة"
+
+msgid "Upgrading system"
+msgstr "جارى ترقية النظام"
+
+msgid "Username:"
+msgstr "اسم المستخدم :"
+
+msgid "Using the following repositories:"
+msgstr "باستخدام المستودعات التالية:"
+
+msgid "Version:"
+msgstr "الإصدار:"
+
+msgid "Viewers"
+msgstr "مستعرضات الصور"
+
+msgid "Waiting"
+msgstr "في الانتظار"
+
+msgid "Waiting for config file prompt"
+msgstr "في انتظار ضبط ملف الاعدادات"
+
+msgid "Waiting for lock"
+msgstr "في انتظار القفل"
+
+msgid "Waiting for medium"
+msgstr "في انتظار الوسط"
+
+msgid "Web"
+msgstr "متصفحات الانترنت"
+
+msgid "Website"
+msgstr "الموقع الإلكتروني"
+
+msgid "Your APT sources were corrupted."
+msgstr "مصادر APT معطوبة"
+
+msgid ""
+"Your APT sources were not correctly restored after you last ran mintInstall. "
+"They now have been restored."
+msgstr ""
+"مصادر (apt) لم تتم استعادتها بشكل صحيح بعد اخر تشغيل لmintinstall .يتم الان "
+"استعادتها"
+
+msgid "Your community account"
+msgstr "حسابك في المجتمع"
+
+msgid "Your review"
+msgstr "مراجعتك"
+
+msgid "Your review:"
+msgstr "تعليقك"
+
+msgid "_Edit"
+msgstr "_تحرير"
+
+msgid "_File"
+msgstr "_ملف"
+
+msgid "_Help"
+msgstr "_مساعدة"
+
+msgid "_View"
+msgstr "_عرض"

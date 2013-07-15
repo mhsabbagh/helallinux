@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="rtl" lang="en-US" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title></title>
+   
+    
+
+ <script type="text/javascript">
+  function changeTitle(title) { 
+    document.title = title; 
+  }
+  function fadeIn(objId,opacity) {
+    if (document.getElementById) {
+      obj = document.getElementById(objId);
+      if (opacity <= 100) {
+        setOpacity(obj, opacity);
+        opacity += 10;
+        window.setTimeout("fadeIn('"+objId+"',"+opacity+")", 100);
+      }
+    }
+  }
+            
+  function setOpacity(obj, opacity) {
+    opacity = (opacity == 100)?99.999:opacity;
+    obj.style.opacity = opacity/100;
+  }
+  function initElement(id) {
+    element = document.getElementById(id);
+    setOpacity(element, 0);
+    element.style.visibility = 'visible';
+    fadeIn(id,0);
+  }
+  function action_button_clicked() {
+    //document.getElementById("button_$action_button_value").disabled = true;
+    document.getElementById("button_$action_button_value").style.visibility = "hidden";
+    changeTitle("call:on_button_clicked");
+  }
+  function action_screenshot_clicked() {   
+    changeTitle("call:on_screenshot_clicked");
+    changeTitle("nop");
+  }
+  function action_website_clicked() {   
+    changeTitle("call:on_website_clicked");
+    changeTitle("nop");
+  }
+  function action_reviews_clicked() {   
+    changeTitle("call:on_reviews_clicked");
+    changeTitle("nop");
+  }
+  function enable_action_button() {
+    document.getElementById("button_$action_button_value").disabled = false;
+  }
+  function disable_action_button() {
+    document.getElementById("button_$action_button_value").disabled = true;
+  }
+  
+  function addReview(mydate, username, rating, comment) { 
+    
+    var table = document.getElementById("reviews");
+	var rowCount = table.rows.length;
+	var row = table.insertRow(rowCount);
+
+	var cell1 = row.insertCell(0);
+	newImg = document.createElement("img");
+	newImg.src = rating;
+	cell1.appendChild(newImg);
+    
+	var cell2 = row.insertCell(1);
+	cell2.innerHTML = comment + "<br/><small><i><font color='#777777'>" + username + " (" + mydate + ")</font></i></small>";            
+  }
+  
+  function addLink(linkname) {
+	var table = document.getElementById("reviews");
+	var rowCount = table.rows.length;
+	var row = table.insertRow(rowCount);
+	var cell1 = row.insertCell(0);
+	cell1.colSpan="3";		
+	cell1.innerHTML=  '<a href="javascript:action_reviews_clicked()" style="color: black;">'+linkname+'</a>';
+  }
+
+  function clearReviews() {
+	var table = document.getElementById("reviews");
+	for(var i = table.rows.length - 1; i >= 0; i--)
+	{
+	    table.deleteRow(i);
+	}
+  }
+
+  
+ </script>
+
+  <style type="text/css">
+    *{ -khtml-user-drag:none; 	}
+    body {
+background-image: url("/usr/lib/sc/data/noise.png");
+      background-repeat: repeat-x repeat-y;        
+      font-family:${font_family};
+      font-size:${font_size};
+      font-weight:${font_weight};
+      font-style:${font_style};
+	  text-align: center;
+    }
+    #wrap{ margin:0 auto; padding: 0 15px 0 15px; background-color: #fff;}
+    #header{ padding-left:76px }
+   
+    h1 { 
+	  text-align: center;
+      position: relative;
+      top: 0;
+      left: 0;
+      font-size: 22px;
+      margin-bottom: 0px;
+    padding-bottom: 0px;
+      }
+
+    h1 a:link,
+    h1 a:visited,
+    h1 a:hover,
+    h1 a:active {
+	  font-size: 13px;
+      position: absolute;
+      top: 0; z-index: 2;
+      color: #000;
+      -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,0)));
+      }
+    h1:after {
+      content: "$appname";
+      color: #000;
+      }
+  
+    h2 {
+	  text-align: center;
+      font-size:80%;
+      margin:0 0 0.3em 0;
+      font-weight:normal;
+    }
+    #error {
+      font-size: 80%;
+      clear:left;
+      border-left: 5px solid #ea2824;
+      border-right: 5px solid #ea2824;
+      background-color: #fcb9b8;
+      padding: 0 5px;
+    }
+    #warning {
+      font-size: 80%;
+      clear:left;
+      border-left: 5px solid #fc9518;
+      border-right: 5px solid #fc9518;
+      background-color: #feeecc;
+      padding: 0 5px;
+    }
+    #description {
+      font-size: 80%;
+      clear:left;
+    }
+    #icon {
+	  text-align: center;
+      margin-left:-76px;
+      width:96px;
+      height:96px;
+	  float: right;
+      z-index:-1;      
+      position:absolute;
+      -webkit-background-clip: border-box;
+      -webkit-background-origin: border-box;
+      -webkit-background-size: 32px 32px;
+    }
+    
+    .pod {
+        border: 1px solid #00CCFF;
+		border-radius: 4px;
+        margin-bottom: 1em;
+        _zoom: 100%;
+        *zoom: 100%;
+    }
+       
+    #screenshot_wrap{
+      display:block;
+    }
+    
+    .screenshot {
+      overflow:hidden;
+      -webkit-box-shadow: rgba(0, 0, 0, 0.4) -4px 2px 10px;
+      	border-radius: 20px;
+        border: 2px solid #6aa5d7;
+      display:inline-block;
+      max-width:500px;
+      max-height:375px;
+      margin-top: 15px;
+      cursor: -webkit-zoom-in;
+      
+      text-align:center;
+      -khtml-user-drag:none;
+    }
+    
+    
+    #text {
+		text-align: center;
+      float:left; 
+      padding-left:86px;
+    }   
+    #package_information { 
+      font-size:70%; 
+    }
+    #maintainance_time { 
+      font-size:70%; 
+    }
+    #license { 
+      font-size:70%; 
+    }
+    #price { 
+      font-size:70%; 
+    } 
+    #action_button_description { 
+      font-size:70%; 
+    } 
+    #reviewsTable { 
+      font-size:90%; 
+      #float:left; 
+      padding-left:30px;
+    }  
+    #infoTable { 
+      font-size:70%; 
+      float:left; 
+      padding-left:86px;
+      padding-bottom:20px;
+    }  
+    #wrapper h2{
+      padding:-15px;
+      color: #fff;
+      font-weight:normal;
+      font-size:1em;      
+      padding:0.2em  0.8em;
+      margin: .25em 0;
+     
+      background-color:#fff;
+       -webkit-border-top-left-radius: 5px;
+       -webkit-border-top-right-radius: 5px;
+    }
+    #wrapper{
+        margin-top:1em;
+        clear:both;
+        border-radius: 5px;
+        background-color:#fff;        
+        -webkit-box-shadow: rgba(0, 0, 0, 0.2) -1px 1px 4px;
+    }
+    #inner{
+      padding:15px;
+      font-size:70%; 
+    }
+	
+	.packageinfor{
+	background-color: ##F0F0F0;
+}
+ </style>
+
+</head>
+    
+<body class="${body_class}">
+
+					<div id="wrapper">
+         <table width="100%">
+         <tr>
+         </tr>
+         </table>
+<table width="100%">
+    <tr>
+    <td valign="absmiddle" align="right"><img src="$iconbig"/></td>
+    <td valign="absmiddle" align="center" nowrap><h1><a href="#">$appname</a></h1><i><small>$summary</small></i><td align="left" valign="absmiddle"><img align=absmiddle src="$iconstatus"/>&nbsp;$action_button_description <input type="button" id="button_${action_button_value}" 
+              class="action_button"
+          alt="$action_button_label"
+              value="$action_button_label"
+              onclick='action_button_clicked()'/></td></td>
+    </tr>
+</table>
+ 
+
+<div id="screenshot-wrap">
+                <div id="screenshot" class="screenshot">
+                    <a href="javascript:action_screenshot_clicked()"><img id="screenshot_thumbnail_img" class="screenshot_thumbnail" onerror="this.style.display='none'" src="http://screenshots.debian.net/thumbnail/$appname"></a>
+                </div>
+            </div> 
+
+<p>
+<div id="description">
+<table width="100%" cellpadding="3">
+        <td valign="top">$description<br/><br/><i><a href="javascript:action_website_clicked()">$homepage</a></i></td>
+        <td valign="top">
+
+        </td>
+
+             </td>
+</table>    
+ 
+</div>
+</p>
+</div>
+    </div>
+					<div id="wrapper">
+                     <h2>$detailsLabel</h2>
+                     <div id="inner">                      
+                       <p><b>$versionLabel</b> $version</p>
+                       <p><b>$sizeLabel</b> $sizeinfo</p>
+                       <p><b>$impactLabel</b> $packagesinfo</p>
+                     </div> 
+                   </div>
+                        </div>
+                            </div>
+    </div>
+</body>
+</html>

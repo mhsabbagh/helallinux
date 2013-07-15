@@ -1,0 +1,12 @@
+Package: helal-shortener
+Version: 1.1
+Architecture: i386
+Maintainer: hannysabbagh <hannysabbagh@hotmail.com>
+Homepage: http://helallinux.com
+Section: Internet
+Priority: standard
+Depends: gtkdialog (>= 0.8.2), wget, helal-menu, curl
+Description: Helal URL Shortener
+ Helal URL Shortener is a simple program to shorten web URLs from the desktop.
+ .
+ .

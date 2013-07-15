@@ -1,0 +1,6 @@
+#!/bin/sh
+if [[ "$LANG" == *ar* ]];then
+	/usr/share/helal-control-center/hcc
+else
+	/usr/share/helal-control-center/hcc-en
+fi

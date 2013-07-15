@@ -1,5 +1,5 @@
 Package: helal-wysiwyg-editor
-Version: 1.0.4
+Version: 1.0.6
 Architecture: i386
 Maintainer: M.hannysabbagh <hannysabbagh@hotmail.com>
 Depends: python-webkit (>= 1.1.5)

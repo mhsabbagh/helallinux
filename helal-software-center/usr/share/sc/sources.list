@@ -1,0 +1,7 @@
+deb http://packages.linuxmint.com/ helena main upstream import
+deb http://archive.ubuntu.com/ubuntu/ karmic main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ karmic-updates main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu/ karmic-security main restricted universe multiverse
+deb http://archive.canonical.com/ubuntu/ karmic partner
+deb http://packages.medibuntu.org/ karmic free non-free
+

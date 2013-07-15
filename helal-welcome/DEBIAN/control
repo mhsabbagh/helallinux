@@ -1,0 +1,12 @@
+Package: helal-welcome
+Version: 1.1
+Architecture: i386
+Maintainer: hannysabbagh <hannysabbagh@hotmail.com>
+Homepage: http://helallinux.com
+Section: Others
+Priority: standard
+Depends: gtkdialog (>= 0.8.2), helal-menu
+Description: Helal Welcome
+ Welcome to Helal Linux!
+ .
+ .

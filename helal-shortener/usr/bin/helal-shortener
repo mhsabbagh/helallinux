@@ -1,0 +1,152 @@
+#!/bin/bash
+
+cd /home/$USER/
+
+GTKDIALOG=gtkdialog
+
+if [[ "$LANG" == *ar* ]];then
+	export MAIN_DIALOG='
+<window title="مقصر روابط هلال" icon-name="stock_internet" decorated="true" resizable="false" width-request="400" border-width="1">
+<vbox>
+<frame تقصير الروابط:>
+<hbox space-fill="true" space-expand="true">
+<text><label>يمكنك تقصير روابط مواقع الإنترنت من هنا، تحتاج اتصالًا بالوب لإكمال العملية، عندما تحصل على العنوان يمكنك حفظه بملف.</label></text>
+
+	<pixmap icon_size="6">
+	<width>48</width>
+	<input file icon="stock_internet"></input>
+	</pixmap>
+</hbox>
+<hbox>
+<entry>
+	<variable>url</variable>
+	<default>http://google.com</default>
+</entry>
+<button>
+	<label>تقصير الرابط</label>
+	<action>curl "'"http://is.gd/create.php?format=simple&url="'"$url"" > /tmp/.file</action>
+	<action type="launch">TEXT</action>
+</button>	
+</hbox>
+
+<hbox space-fill="true" space-expand="true">
+	<button>
+	<label>حول</label>
+	<input file icon="stock_about"></input>
+	<action type="launch">ABOUT</action>
+	</button>
+
+			<button cancel></button>
+</hbox>
+</frame>
+
+</vbox>
+</window>
+
+'
+export TEXT='
+<window title="الرابط:" icon-name="internet" resizable="false" width-request="200" height-request="50">
+<vbox>
+
+		<edit editable="false">
+			<variable>EDITOR</variable>
+			<height>150</height>
+			<width>350</width>
+			<input file>/tmp/.file</input>
+		</edit>
+
+</vbox>
+</window>
+'
+export ABOUT='
+<window title="حول:" icon-name="internet" resizable="false" width-request="400" height-request="200">
+<vbox>
+<hbox space-fill="true" space-expand="true">
+	<pixmap icon_size="6">
+	<width>96</width>
+	<input file icon="stock_internet"></input>
+	</pixmap>
+</hbox>
+		<text>
+		<label>مقصر روابط هلال هو برنامج رسومي لتقصير الروابط من سطح المكتب ،  مرخص تحت GPL 3 أو ما بعدها. بُرمج بواسطة محمد هاني صباغ hannysabbagh@hotmail.com </label>
+		</text>
+
+</vbox>
+</window>
+'
+gtkdialog -p MAIN_DIALOG --center
+
+else
+
+export MAIN_DIALOG='
+<window title="Helal URL Shortener" icon-name="stock_internet" decorated="true" resizable="false" width-request="400" border-width="1">
+<vbox>
+<frame URL Shortener:>
+<hbox space-fill="true" space-expand="true">
+<text><label>You can Shorten Web URls from here, you need an internet connection to do this.</label></text>
+
+	<pixmap icon_size="6">
+	<width>48</width>
+	<input file icon="stock_internet"></input>
+	</pixmap>
+</hbox>
+<hbox>
+<entry>
+	<variable>url</variable>
+	<default>http://helallinux.com</default>
+</entry>
+<button>
+	<label>Shorten URL</label>
+	<action>curl "'"http://is.gd/create.php?format=simple&url="'"$url"" > /tmp/.file</action>
+	<action type="launch">TEXT</action>
+</button>	
+</hbox>
+
+<hbox space-fill="true" space-expand="true">
+	<button>
+	<label>About</label>
+	<input file icon="stock_about"></input>
+	<action type="launch">ABOUT</action>
+	</button>
+
+			<button cancel></button>
+</hbox>
+</frame>
+
+</vbox>
+</window>
+
+'
+export TEXT='
+<window title="Link:" icon-name="internet" resizable="false" width-request="200" height-request="50">
+<vbox>
+
+		<edit editable="false">
+			<variable>EDITOR</variable>
+			<height>150</height>
+			<width>350</width>
+			<input file>/tmp/.file</input>
+		</edit>
+
+</vbox>
+</window>
+'
+export ABOUT='
+<window title="About:" icon-name="internet" resizable="false" width-request="400" height-request="200">
+<vbox>
+<hbox space-fill="true" space-expand="true">
+	<pixmap icon_size="6">
+	<width>96</width>
+	<input file icon="stock_internet"></input>
+	</pixmap>
+</hbox>
+		<text>
+		<label>Helal URL Shortener is a simple GUI program to Shorten Web URLs, it is released under GPL 3 or later, programmed by M.Hanny Sabbagh hannysabbagh@hotmail.com </label>
+		</text>
+
+</vbox>
+</window>
+'
+gtkdialog -p MAIN_DIALOG --center
+
+fi

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Helal Software Center
+Name[ar]=مركز برمجيات هلال
+Comment=Install new applications
+Comment[ar]=تثبيت برمجيات جديدة وإزالتها بسهولة
+Exec=gksu helal-software-center
+Icon=/usr/share/pixmaps/sc.png
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=helallinux;

@@ -1,0 +1,8 @@
+Package: helal-menu
+Version: 1.0
+Architecture: i386
+Maintainer: hannysabbagh <hannysabbagh@hotmail.com>
+Section: others
+Priority: optional
+Homepage: https://helallinux.com
+Description: This package provides Helal Linux categories under the applictions menu.

@@ -1,0 +1,260 @@
+#!/bin/sh
+# Helal Welcome By "M.Hanny Sabbagh", <hannysabbagh@hotmail.com>.
+
+GTKDIALOG=gtkdialog
+
+export MAIN_DIALOG='
+<window title="أهلاً بك إلى هلال لينُكس" icon-name="gtk-about" resizable="true"  border-width="3">
+   <vbox>	
+<pixmap>
+	<width>96</width>
+	<input file>"'/usr/share/helal-welcome/icons/logo.svg'"</input>
+</pixmap>
+
+<text><label>أهلاً بك إلى هلال لينُكس 4.0 , نأمل أن تستمتع باستخدام هلال كما استمتعنا نحن بتصميمها لك, هناك عدة أمور عليك تصفحها قبل الشروع في العمل, وننصحك بمراجعة موقع التوزيعة أيضاً.</label></text>
+
+<frame أساسيات:>
+<hbox space-fill="true" space-expand="true">
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/book.svg'"</input>
+		<label>دليل الإستخدام</label>
+		<action>xdg-open http://www.helallinux.com/wiki/doku.php?id=user-guide4 &</action>
+		</button>  
+		
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/website.png'"</input>
+		<label>موقع التوزيعة</label>
+		<action>xdg-open http://helallinux.com &</action>
+		</button>	
+
+<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/facebook.gif'"</input>
+		<label>مجموعتنا على فيسبوك</label>
+		<action>xdg-open http://www.facebook.com/groups/helallinux &</action>
+		</button>  </hbox>
+
+ 
+<hbox space-fill="true" space-expand="true">
+
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/forums.svg'"</input>
+		<label>المنتديات</label>
+		<action>xdg-open http://helallinux.com/forum &</action>
+		</button>  
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/wiki.png'"</input>
+		<label>موسوعة هلال</label>
+	<action>xdg-open http://helallinux/wiki &</action>
+		</button>  
+		
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/answers.svg'"</input>
+		<label>إجابات هلال</label>
+		<action>xdg-open http://helallinux.com/answers &</action>
+		</button> 
+
+
+
+</hbox></frame>
+
+
+
+<frame تطبيقات جديدة:>
+<hbox space-fill="true" space-expand="true">
+<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/helal-recorder.svg'"</input>
+		<label>مسجّل هلال</label>
+		<action>helal-recorder &</action>
+		</button>
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/helal-control-center.svg'"</input>
+		<label>مركز تحكم هلال</label>
+		<action>helal-control-center &</action>
+		</button>  
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/sc.png'"</input>
+		<label>مركز البرمجيات</label>
+		<action>gksu helal-software-center &</action>
+		</button>  
+		
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/editor.png'"</input>
+		<label>محرر هلال</label>
+		<action>helal-wysiwyg-editor</action>
+		</button>  
+	 </hbox>
+
+<hbox space-fill="true" space-expand="true">
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/helallinuxads.png'"</input>
+		<label>إيقاف الإعلانات</label>
+		<action>helal-ads-remove &</action>
+		</button>  
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file icon="stock_internet"></input>
+		<label>مقصر الروابط</label>
+		<action>helal-shortener &</action>
+		</button>  
+</hbox>
+</frame>
+<frame كنّ هلاليًا:>
+<hbox space-fill="true" space-expand="true">
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/join.svg'"</input>
+		<label>انضم الينا</label>
+		<action>xdg-open http://www.helallinux.com/wiki/doku.php?id=%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D9%87%D9%85%D8%A9_%D9%81%D9%8A_%D8%AA%D8%B7%D9%88%D9%8A%D8%B1_%D9%87%D9%84%D8%A7%D9%84 &</action>
+		</button>  
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/donate-icon1.gif'"</input>
+		<label>تبرع للمشروع</label>
+		<action>xdg-open http://helallinux.com/donate</action>
+		</button>  
+</hbox>
+</frame>
+
+   </vbox>
+
+</window>
+'
+
+export EN_DIALOG='
+<window title="Welcome to HelalLinux" icon-name="gtk-about" resizable="true"  border-width="3">
+   <vbox>	
+<pixmap>
+	<width>96</width>
+	<input file>"'/usr/share/helal-welcome/icons/logo.svg'"</input>
+</pixmap>
+
+<text><label>Welcome to Helal Linux 4.0, we hope you enjoy your new system as we enjoyed developing it, you must browse some links before starting to work with your new system.</label></text>
+
+<frame Basics:>
+<hbox space-fill="true" space-expand="true">
+ 
+		
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/website.png'"</input>
+		<label>Helal Website</label>
+		<action>xdg-open http://helallinux.com &</action>
+		</button>	
+
+<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/facebook.gif'"</input>
+		<label>Our Group on Facebook</label>
+		<action>xdg-open http://www.facebook.com/groups/helallinux &</action>
+		</button>  </hbox>
+
+ 
+<hbox space-fill="true" space-expand="true">
+
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/forums.svg'"</input>
+		<label>Forums</label>
+		<action>xdg-open http://helallinux.com/forums &</action>
+		</button>  
+
+
+
+</hbox></frame>
+
+
+
+<frame New apps:>
+<hbox space-fill="true" space-expand="true">
+<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/helal-recorder.svg'"</input>
+		<label>Helal Recorder</label>
+		<action>helal-recorder &</action>
+		</button>
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/helal-control-center.svg'"</input>
+		<label>Helal Control Center</label>
+		<action>helal-control-center &</action>
+		</button>  
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/sc.png'"</input>
+		<label>Helal Software Center</label>
+		<action>gksu helal-software-center &</action>
+		</button>  
+		
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/editor.png'"</input>
+		<label>Helal WYSIWYG Editor</label>
+		<action>helal-wysiwyg-editor</action>
+		</button>  
+	 </hbox>
+
+<hbox space-fill="true" space-expand="true">
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/helallinuxads.png'"</input>
+		<label>Stop Helal-Ads</label>
+		<action>helal-ads-remove &</action>
+		</button>  
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file icon="stock_internet"></input>
+		<label>Helal Shortener</label>
+		<action>helal-shortener &</action>
+		</button>  
+</hbox>
+</frame>
+<frame Be a Helalian:>
+<hbox space-fill="true" space-expand="true">
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/join.svg'"</input>
+		<label>Join Us</label>
+		<action>xdg-open http://www.helallinux.com/wiki/doku.php?id=%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D9%87%D9%85%D8%A9_%D9%81%D9%8A_%D8%AA%D8%B7%D9%88%D9%8A%D8%B1_%D9%87%D9%84%D8%A7%D9%84 &</action>
+		</button>  
+
+	<button use-stock="true" image-position="1" relief="1">
+		<width>24</width>
+		<input file>"'/usr/share/helal-welcome/icons/donate-icon1.gif'"</input>
+		<label>Donate</label>
+		<action>xdg-open http://helallinux.com/donate</action>
+		</button>  
+</hbox>
+</frame>
+
+   </vbox>
+
+</window>
+'
+if [[ "$LANG" == *ar* ]]; then
+gtkdialog -p MAIN_DIALOG --center
+else
+gtkdialog -p EN_DIALOG --center
+fi
+

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Helal Welcome
+Name[ar]= ترحيب هلال
+Comment=Welcome to Helal Linux!
+Comment[ar]= أهلًا بك إلى هلال لينُكس!
+Categories=helallinux;
+Exec=helal-welcome
+Icon=stock_about
+StartupNotify=true
+Terminal=false
+Type=Application
+

@@ -1,0 +1,9 @@
+Package: helal-control-center
+Version: 1.0.0-4
+Architecture: i386
+Maintainer: hannysabbagh <hannysabbagh@hotmail.com>
+Depends: dpkg (>= 1.0), gtkdialog (>= 0.8.3), mintnanny
+Section: Others
+Priority: optional
+Description: Helal Control Center
+ A Full control center for the Helal Linux desktop, built using gtkdialog and shell script.

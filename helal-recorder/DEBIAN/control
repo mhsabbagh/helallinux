@@ -1,15 +1,14 @@
 Package: helal-recorder
-Version: 1.0.3-2-helal4
+Version: 1.0.11
 Architecture: i386
 Maintainer: hannysabbagh <hannysabbagh@hotmail.com>
 Homepage: http://helallinux.com
 Section: AudioVideo
 Priority: standard
-Installed-Size: 256
-Depends: python-webkit (>= 1.1.5), libav-tools (>= 0.8.6), sh-to-bash (>= 1.0), mplayer (>=1.0)
+Depends: gtkdialog (>= 0.8.2), libav-tools (>= 0.8.6-6), mplayer (>=1.0), helal-menu
 Description: Helal Recorder
  Helal Recorder is a GUI recorder for Helal Linux desktop.
  it can record videos in many formats like: nut, avi, flv, mkv.
- this recorder uses python-webkit for its GUI, and avconv for recording the desktop.
+ this recorder uses gtkdialog for its GUI, and avconv for recording the desktop.
  .
  .

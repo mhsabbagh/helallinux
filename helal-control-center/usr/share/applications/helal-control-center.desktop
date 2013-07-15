@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Helal Control Center
+Name[ar]=مركز تحكم هلال
+Comment=A Control Center for Helal Linux
+Comment[ar]=مركز تحكم لتوزيعة هلال لينُكس
+Exec=bash /usr/bin/helal-control-center
+Terminal=no
+Type=Application
+StartupNotify=true
+Icon=/usr/share/helal-control-center/images/helal-control-center.svg
+Categories=helallinux;
+
+

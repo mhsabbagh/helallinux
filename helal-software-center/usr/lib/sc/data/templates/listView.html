@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ar" lang="ar" DIR="rtl">
+<head>
+ <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+ <title></title>
+ <script type="text/javascript">
+  function changeTitle(title) { 
+    document.title = title; 
+    document.title = "nop"; 
+  }
+
+
+
+ function addPackage(Name, icon, desc) {
+
+  var ni = document.getElementById('list');
+
+
+
+  var newdiv = document.createElement('a');
+
+  click_cb = 'changeTitle("call:on_package_clicked:' + Name + '");';
+  newdiv.setAttribute('onclick', click_cb);
+    
+  newdiv.setAttribute('id',Name);
+  newdiv.setAttribute('class', "pack");
+  newdiv.innerHTML = ' <img class="pack_icon" src="'+icon+'"/> '+Name+'<span>'+desc+'</span>';
+
+ ni.appendChild(newdiv);
+
+}
+function Clear() {
+  var d = document.getElementById('page');
+  var olddiv = document.getElementById('list');
+  d.removeChild(olddiv);
+
+  var newdiv = document.createElement('div');
+  newdiv.setAttribute('id','list');
+  d.appendChild(newdiv);
+}
+ </script>
+ <style>
+
+html {height:100%; overflow-x :hidden; -webkit-user-select: none; cursor:default; -webkit-font-smoothing: antialiased;}
+body {
+	background-image: url("/usr/lib/sc/data/noise.png");
+	margin:12px;
+	font:12px/15px sans-serif;
+	color:#8a8a8a;
+	text-align: right;
+
+}
+
+.pack {
+	color: #000;
+    font-weight: bold;
+	font-size: 13.5px;
+    display: inline;
+	height: 100px;
+    border-color: transparent;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+    padding-bottom: 5px;
+    width: 200px;
+    padding-top: 5px;
+    margin-right: 10px;
+    position: relative;
+    cursor:pointer;
+    transition: all .50s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
+}
+
+.pack:hover {
+
+    border-color: rgba(23, 51, 78, 0.15) rgba(23, 51, 78, 0.17) rgba(23, 51, 78, 0.2);
+    background-color: rgba(3, 14, 27, 0.03);
+}
+.pack:active {
+   background-image: linear-gradient(rgba(3, 14, 27, 0.02), rgba(3, 14, 27, 0.05));
+    border-color: rgba(23, 51, 78, 0.2) rgba(23, 51, 78, 0.23) rgba(23, 51, 78, 0.25);
+    -webkit-box-shadow: 0 1px 1px rgba(3, 14, 27, 0.05) inset, 0 0 1px rgba(3, 14, 27, 0.1) inset;
+    -webkit-transition-duration: 0;
+}
+
+.pack span {
+    margin-right: 7px;
+    margin-top: 30px;
+    position: absolute;
+}
+.pack img {
+	height: 32px;
+	width: 32px;
+	float: left;
+}
+.pack:hover img {
+	opacity: 0.8;
+}
+
+#page a:nth-child(odd) {  background-color:#fff; margin-top: 10px; }
+#page a:nth-child(even) { background-color:#F8F7F5; margin-top: 10px; }
+
+.pack span {
+    color: #5F5F5F;
+    display: block;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+</style>
+ </head>
+
+<body id="page">
+ 
+  <div id="list">
+ <a class="pack"> <img class="pack_icon" src="/home/linuxer9/available.png" alt="" >
+ saddf
+ <span>discription discriptiondiscriptiondiscriptiondiscriptiondiscription</span></a>
+
+ </div>
+</body>
+</html>

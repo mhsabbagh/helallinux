@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ar" lang="ar" DIR="rtl">
+<head>
+ <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+ <title></title>
+ <script type="text/javascript">
+  function changeTitle(title) { 
+    document.title = title; 
+    document.title = "nop"; 
+  }
+  function addCategory(Name, num_packages, icon) {
+
+  var ni = document.getElementById('list');
+
+
+
+  var newdiv = document.createElement('div');
+
+  click_cb = 'changeTitle("call:on_category_clicked:' + Name + '");';
+  newdiv.setAttribute('onclick', click_cb);
+    
+  newdiv.setAttribute('id',Name);
+  newdiv.setAttribute('class', "launcher");
+  newdiv.innerHTML = ' <img src="'+icon+'"/> <h3>'+Name+'</h3> <span>'+num_packages+'</span>';
+
+ ni.appendChild(newdiv);
+ 
+  }
+  function clearCategories() {      
+  var d = document.getElementById('page');
+  var olddiv = document.getElementById('list');
+  d.removeChild(olddiv);
+
+  var newdiv = document.createElement('div');
+  newdiv.setAttribute('id','list');
+  d.appendChild(newdiv);
+
+  }
+
+ </script> 
+ <style type="text/css">
+ 
+html {height:100%; overflow-x :hidden; -webkit-user-select: none; cursor:default; -webkit-font-smoothing: antialiased;}
+body {
+	background-image: url("/usr/lib/sc/data/noise.png");
+	margin:12px;
+	font:12px/15px sans-serif;
+	color:#8a8a8a;
+	text-align: right;
+
+}
+
+.launcher {
+    border-color: transparent;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+    padding-bottom: 5px;
+    width: 200px;
+    padding-top: 5px;
+    margin-right: 10px;
+    position: relative;
+    cursor:pointer;
+    transition: all .50s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
+}
+
+.launcher:hover {
+
+    border-color: rgba(23, 51, 78, 0.15) rgba(23, 51, 78, 0.17) rgba(23, 51, 78, 0.2);
+    background-color: rgba(3, 14, 27, 0.03);
+}
+.launcher:active {
+   background-image: linear-gradient(rgba(3, 14, 27, 0.02), rgba(3, 14, 27, 0.05));
+    border-color: rgba(23, 51, 78, 0.2) rgba(23, 51, 78, 0.23) rgba(23, 51, 78, 0.25);
+    -webkit-box-shadow: 0 1px 1px rgba(3, 14, 27, 0.05) inset, 0 0 1px rgba(3, 14, 27, 0.1) inset;
+    -webkit-transition-duration: 0;
+}
+.launcher h3 {
+    float: left;
+  
+	position: absolute;
+    color: #000000;
+    display: inline-block;
+    padding-right: 7px;
+}
+.launcher span {
+    margin-right: 7px;
+    margin-top: 30px;
+    position: absolute;
+}
+.launcher img {
+	opacity: 1;
+	height: 48px;
+	width: 48px;
+	float: right;
+}
+.launcher:hover img {
+	opacity: 0.8;
+}
+ </style>
+ </head>
+
+<body id="page">
+<div id="list">
+<div class="launcher" align="right"> <img src="" alt="" ><h3>test</h3><span>12حزمة</span></div>
+
+</div>
+
+</body>
+</html>

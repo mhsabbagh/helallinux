@@ -1,0 +1,1282 @@
+#!/bin/bash
+# Helal Control Center(HCC) By "M.Hanny Sabbagh", <hannysabbagh@hotmail.com>
+
+# A set of functions to get themes,icons,hardware information..
+themename() {
+gsettings get org.gnome.desktop.interface gtk-theme | awk -F"'" '{print $2}'
+}
+
+# This function will grep the windows manager theme using gsettings, and will cut the output to make it like "Crux" not like "'Crux'" using awk.
+windowstheme() {
+gsettings get org.gnome.desktop.wm.preferences theme | awk -F"'" '{print $2}'
+}
+
+theme_list() {
+ls -d /usr/share/themes/*/gtk-3.0 | awk -F"/" '{print $5}' 
+}
+
+fontname() {
+gsettings get org.gnome.desktop.interface font-name | awk -F"'" '{print $2}'
+}
+
+wfontname() {
+gsettings get org.gnome.desktop.wm.preferences titlebar-font | awk -F"'" '{print $2}'
+}
+
+icon_list() {
+ls -d /usr/share/icons/*/index.theme | awk -F"/" '{print $5}' 
+}
+
+metacity_themes() {
+ls -d /usr/share/themes/*/metacity-1 | awk -F"/" '{print $5}' 
+}
+
+display_manager() {
+cat /etc/X11/default-display-manager | awk -F"/" '{print $4}'
+}
+
+currenticon() {
+gsettings get org.gnome.desktop.interface icon-theme | awk -F"'" '{print $2}'
+}
+
+set_dm() {
+if [ -f /usr/sbin/mdm ]; then
+xterm -e "sudo dpkg-reconfigure mdm && sleep 3" &
+elif [ -f /usr/sbin/lightdm ]; then
+xterm -e "sudo dpkg-reconfigure lightdm && sleep 3" &
+elif [ -f /usr/sbin/gdm ]; then
+xterm -e "sudo dpkg-reconfigure gdm && sleep 3" &
+fi
+}
+
+Vga_card() {
+lspci|grep VGA | awk -F":" '{print $3}'
+}
+
+ethernet() {
+lspci|grep Ethernet | awk -F":" '{print $3}'
+}
+
+cpu() {
+cat /proc/cpuinfo|grep "model name" | awk -F":" '{print $2}'
+}
+
+optimus() {
+xterm -e "
+wget -P /tmp/kernel-3.9/ http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.9-raring/linux-image-3.9.0-030900-generic_3.9.0-030900.201304291257_i386.deb ;
+wget -P /tmp/kernel-3.9/ http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.9-raring/linux-headers-3.9.0-030900_3.9.0-030900.201304291257_all.deb ;
+wget -P /tmp/kernel-3.9/ http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.9-raring/linux-headers-3.9.0-030900-generic_3.9.0-030900.201304291257_i386.deb ;
+sudo dpkg -i /tmp/kernel-3.9/*.deb ;
+sudo apt-get install nvidia-319 ;
+" &
+}
+
+avapackages() {
+apt-cache dumpavail | grep Package | cut -d ' ' -f 2 > /tmp/available-packages
+gedit /tmp/available-packages
+sleep 1
+rm /tmp/available-packages
+}
+
+installedpackages() {
+dpkg --get-selections > /tmp/installed-packages
+sort /tmp/installed-packages > /tmp/installed-packages2
+gedit /tmp/installed-packages2 
+sleep 1
+rm /tmp/installed-packages
+rm /tmp/installed-packages2
+}
+
+commands() {
+awk '{print $1}' ~/.bash_history | sort | uniq -c | sort -rn | head -n 10 > /tmp/commands
+gedit /tmp/commands
+sleep 1
+rm /tmp/commands
+}
+
+#export the functions to use them later.
+export -f windowstheme
+export -f themename
+export -f currenticon
+export -f cpu
+export -f ethernet
+export -f Vga_card
+export -f set_dm
+export -f display_manager
+export -f theme_list 
+export -f icon_list 
+export -f metacity_themes
+export -f fontname
+export -f wfontname
+export -f optimus
+export -f avapackages
+export -f installedpackages
+export -f commands
+
+#go to the home folder, useful when using dpkg-repack or listing recent commands or available packages..
+cd /home/$USER/
+
+#export gtkdialog variable.
+GTKDIALOG=gtkdialog
+
+export MAIN_DIALOG='
+<window title="مركز تحكم هلال" icon-name="system" decorated="true" resizable="false" width-request="800">
+   <vbox>
+
+	<button use-stock="true" image-position="1" relief="2">
+	<width>48</width>
+	<label>مركز تحكم هلال</label>
+	<input file>"/usr/share/helal-control-center/images/helal-control-center.svg"</input>
+	<action type="launch">About</action>
+	</button>
+
+
+
+
+<hbox space-expand="true" space-fill="true">
+
+
+<text><label>يساعدك على تخصيص نظامك وتعديله بسهولة.</label></text>
+
+
+	</hbox>
+<notebook tab-labels="البداية|النظام|سطح المكتب|عتاد وشبكة|برامج" page="00" tab-hborder="40" tab-vborder="15" tab-pos="00" >
+	<vbox>
+
+
+
+		<frame النظام:>
+		<hbox space-expand="true" space-fill="false">
+
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/firewall.svg"</input>
+		<label>الجدار الناري</label>
+		<action>gufw &</action>
+		</button>
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/software-sources.svg"</input>
+		<label>مصادر البرمجيات</label>
+		<action>gksu software-properties-gtk &</action>
+		</button>
+
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/software-update.svg"</input>
+		<label>مدير التحديثات </label>
+		<action>update-manager &</action>
+		</button> 
+
+
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/software-add.svg"</input>
+		<label>مركز البرمجيات</label>
+		<action>gksu sc &</action>
+		</button>
+</hbox>
+
+		<hbox space-expand="true" space-fill="false">
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/power-management.svg"</input>
+		<label>إدارة الطاقة</label>
+		<action>gnome-control-center power &</action>
+		</button>
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/time-date-settings.svg"</input>
+		<label>الوقت والتاريخ</label>
+		<action>gnome-control-center datetime &</action>
+		</button>
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/keyboard.svg"</input>
+		<label>لوحة المفاتيح</label>
+		<action>gnome-control-center keyboard &</action>
+		</button>
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/system-language.svg"</input>
+		<label>لغة النظام</label>
+		<action>/usr/bin/gnome-language-selector &</action>
+		</button> 
+
+		
+	
+
+</hbox></frame> 
+
+<frame إعدادات:>
+
+
+<hbox space-expand="true" space-fill="true">
+
+	<button use-stock="true" image-position="2" relief="2">
+	<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/printer.svg"</input>
+	<label>إدارة الطابعات</label>
+	<action> system-config-printer</action>
+	</button>
+
+	<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/display.svg"</input>
+		<label>دقة الشاشة</label>
+		<action>gnome-control-center display &</action>
+		</button>
+
+
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/sound-preferences.svg"</input>
+		<label>إعدادات الصوت</label>
+		<action> gnome-control-center sound &</action>
+		</button>
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/root.svg"</input>
+		<label>الإتاحة</label>
+		<action>gnome-control-center universal-access &</action>
+		</button> 
+</hbox>
+
+<hbox space-expand="true" space-fill="true">
+
+	<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/hardware-info.svg"</input>
+	<label>معلومات العتاد</label>
+	<action> hardinfo &</action>
+	</button>
+
+	<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/hardware.svg"</input>
+	<label>القرص الصلب</label>
+	<action> gnome-disks &</action>
+	</button>
+
+
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/bluetooth.svg"</input>
+		<label>دعم البلوتوث</label>
+		<action>gnome-control-center bluetooth &</action>
+		</button> 
+
+	<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/mouse.svg"</input>
+	<label>إعدادات الفأرة</label>
+	<action>gnome-control-center mouse &</action>
+	</button>
+
+</hbox>
+
+<hbox space-expand="true" space-fill="true">
+
+
+	
+
+	<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/backup.svg"</input>
+	<label>النسخ الاحتياطي</label>
+	<action>gnome-control-center deja-dup &</action>
+	</button> 
+
+
+	<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/scanner.svg"</input>
+	<label>الماسح الضوئي</label>
+	<action>simple-scan &</action>
+	</button>
+
+		<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/users-accounts.svg"</input>
+		<label>إدارة الحسابات</label>
+		<action>users-admin &</action>
+		</button>
+
+
+	<button use-stock="true" image-position="2" relief="2">
+		<width>48</width>
+		<input file>"/usr/share/helal-control-center/images/system.svg"</input>
+	<label>تخصيص المظهر</label>
+	<action>gnome-tweak-tool &</action>
+	</button>
+
+
+
+
+</hbox>
+</frame>
+
+
+
+
+</vbox>
+
+<vbox scrollable="true">
+
+
+
+<frame الإدارة السريعة:>
+
+
+
+<hbox space-expand="true" space-fill="true">
+<text> <label>من هنا يمكنك إدارة النظام بسرعة عبر مهام مجهزة مسبقاً, اضغط على اسم المهمة لتنفيذها.</label> </text>
+	
+	<pixmap icon_size="6">
+	<width>48</width>
+	<input file>"/usr/share/helal-control-center/images/system.svg"</input>
+	</pixmap>
+
+</hbox>
+
+<hbox space-expand="true" space-fill="true">
+	<button use-stock="true" image-position="1" relief="2">
+	<width>32</width>
+	<label>تطبيقات بدء التشغيل</label>
+<input file>"/usr/share/helal-control-center/images/startup-applications.svg"</input>
+	<action>gnome-session-properties & </action>
+	</button>
+
+	<button use-stock="true" image-position="1" relief="2">
+	<width>32</width>
+	<label>تعديل قائمة التطبيقات</label>
+<input file>"/usr/share/helal-control-center/images/edit-menu.svg"</input>
+	<action>alacarte &</action>
+	</button>
+
+
+
+
+
+</hbox>
+
+
+<hbox space-expand="true" space-fill="true">
+	
+
+	<button use-stock="true" image-position="1" relief="2">
+	<width>32</width>
+<input file>"/usr/share/helal-control-center/images/system-clean.svg"</input>
+	<label>تنظيف النظام</label>
+	<action> xterm -e "sudo apt-get clean && sudo apt-get autoremove && sudo apt-get autoclean  && sleep 3" & </action>
+	</button>
+
+	<button use-stock="true" image-position="1" relief="2">
+	<width>32</width>
+	<input file>"/usr/share/helal-control-center/images/software-update.svg"</input>
+	<label>ترقية التوزيعة</label>
+	<action> xterm -e  "sudo apt-get update && sudo do-release-upgrade && sleep 3" &</action>
+	</button>
+
+<button use-stock="true" image-position="1" relief="2">
+	<width>32</width>
+	<label>عرض الأوامر الأكثر استخدامًا</label>
+	<input file>"/usr/share/helal-control-center/images/installed-packages.svg"</input>
+	<action>commands</action>
+</button>
+</hbox>
+
+
+</frame>
+
+<frame مدير الولوج:>
+<hbox space-fill="true" space-expand="true">
+<text><label>مدير الولوج هو التطبيق المسؤول عن إدخالك إلى هلال لينُكس، يمكنك تغيير مدير الولوج من هنا، لا تعدل شيئًا إن كنت لا تعرف ماتفعله، عندما تضغط على الزر بالأسفل وتظهر لك الطرفية، اكتب كلمة المرور، ثم اضغط على زر Tab ثم اضغط على زر Enter, اختر مدير الولوج الذي تريده ثم اضغط Enter.</label></text>
+
+	<pixmap icon_size="6">
+	<width>48</width>
+	<input file>"/usr/share/helal-control-center/images/backup.svg"</input>
+	</pixmap>
+</hbox>
+<hbox space-fill="true" space-expand="true">
+<button>
+	<label>تغيير مدير الولوج</label>
+<action>set_dm</action>
+</button>	
+</hbox>
+</frame>
+
+<frame إدارة الحزم:>
+<hbox space-fill="true" space-expand="true">
+<button use-stock="true" image-position="1" relief="2">
+	<width>32</width>
+	<label>عرض كل الحزم المتوفرة</label>
+	<input file>"/usr/share/helal-control-center/images/software-add.svg"</input>
+	<action>avapackages</action>
+</button>
+
+	<button use-stock="true" image-position="1" relief="2">
+	<width>32</width>
+	<label>عرض كل الحزم المثبّتة</label>
+<input file>"/usr/share/helal-control-center/images/installed-packages.svg"</input>
+	<action>installedpackages</action>
+	</button>
+
+	<button use-stock="true" image-position="1" relief="2">
+	<width>32</width>
+	<input file>"/usr/share/helal-control-center/images/package-upgrade.svg"</input>
+	<label>تثبيت جميع التحديثات</label>
+	<action>xterm -e "sudo apt-get update && sudo apt-get upgrade  && sleep 3" &</action>
+	</button>
+</hbox>
+
+<hbox space-fill="true" space-expand="true">
+<text><label>من هنا يمكنك  تحزيم الحزم المثبتة، اكتب اسم الحزم لكي يتم تحزيمها وإرسالها لمجلد المنزل الخاص بك، اترك فراغًا لتحزيم أكثر من حزمة.</label></text>
+
+	<pixmap icon_size="6">
+	<width>48</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	</pixmap>
+</hbox>
+<hbox>
+<entry>
+	<variable>package</variable>
+</entry>
+<button>
+	<label>إعادة التحزيم</label>
+	<action>fakeroot -u dpkg-repack $package</action>
+</button>	
+</hbox>
+</frame>
+
+<frame ملفات النظام:>
+<text><label>تحذير: هذه ملفات خاصة بالنظام، اللعب بها قد يؤدي لانهيار نظامك بالكامل.</label></text>
+<button use-stock="true" image-position="4" relief="1">
+	<label>/etc/hosts.deny</label>	
+	<width>48</width>
+	<action>gksu gedit /etc/hosts.deny &</action>
+</button>
+
+<button use-stock="true" image-position="4" relief="1">
+	<label>/etc/lightdm/lightdm.conf</label>	
+	<width>48</width>
+	<action>gksu gedit /etc/lightdm/lightdm.conf &</action>
+</button>
+
+<button use-stock="true" image-position="4" relief="1">
+	<label>/etc/X11/default-display-manager</label>	
+	<width>48</width>
+	<action>gksu gedit /etc/X11/default-display-manager &</action>
+</button>
+
+<button use-stock="true" image-position="4" relief="1">
+	<label>/etc/fstab</label>	
+	<width>48</width>
+	<action>gksu gedit /etc/fstab &</action>
+</button>
+
+<button use-stock="true" image-position="4" relief="1">
+	<label>/etc/apt/sources.list</label>	
+	<width>48</width>
+	<action>gksu gedit /etc/apt/sources.list &</action>
+</button>
+</frame>
+
+</vbox>
+
+<vbox scrollable="true">
+
+<frame المظهر:>
+
+
+<hbox space-expand="true" space-expand="true">
+
+
+	<text xalign="2"><label>يمكنك القيام بتعديل مظهر سطح المكتب أو تثبيت سِمات جديدة من هنا,ستحتاج اتصالاً بالوِب لتحميل الخلفيات والسِمات الجديدة.</label></text>
+
+	<pixmap icon_size="6">
+	<width>48</width>
+	<input file>"/usr/share/helal-control-center/images/config-themes.svg"</input>
+	</pixmap>
+</hbox>
+
+
+<hbox space-expand="true" space-fill="true">
+  <text><label>السِمة:</label></text>
+
+<comboboxtext fs-folder="true" fs-title="true" file-monitor="true" auto-refresh="true">
+		<input>themename</input>
+		<input>theme_list</input> 
+		<variable>COMBOBOX</variable>
+		<action>gsettings set org.gnome.desktop.interface gtk-theme $COMBOBOX</action>
+		</comboboxtext>
+
+	<button>
+	<label>تحميل سمات جديدة</label>
+	<width>32</width>
+	<action>xdg-open http://gnome-look.org</action>
+	<input file>/usr/share/helal-control-center/images/download-themes.svg</input>
+</button>
+</hbox>
+
+
+<hbox space-expand="true" space-fill="true">
+  		<text><label>النوافذ:</label></text>
+		<comboboxtext fs-folder="true" fs-title="true" file-monitor="true" auto-refresh="true">
+		<input>windowstheme</input>
+		<input>metacity_themes</input> 
+		<variable>metacity</variable>
+		<action>gsettings set org.gnome.desktop.wm.preferences theme $metacity</action>
+		</comboboxtext>
+
+<button>
+	<label>تحميل سمات جديدة</label>
+	<width>32</width>
+	<action>xdg-open http://gnome-look.org</action>
+	<input file>/usr/share/helal-control-center/images/download-themes.svg</input>
+</button>
+</hbox>
+
+
+<hbox space-expand="true" space-fill="true">
+	  <text><label>الأيقونات:</label></text>
+<comboboxtext fs-folder="true" fs-title="true" file-monitor="true" auto-refresh="true">
+		<input>currenticon</input>
+		<input>icon_list</input> 
+		<variable>icons</variable>
+		<action>gsettings set org.gnome.desktop.interface icon-theme $icons</action>
+		</comboboxtext>
+<button>
+	<label>تحميل الأيقونات جديدة</label>
+	<width>32</width>
+	<action>xdg-open http://gnome-look.org</action>
+	<input file>/usr/share/helal-control-center/images/download-themes.svg</input>
+</button>
+</hbox>
+
+</frame>
+
+<hbox space-expand="true" space-fill="true">
+<frame أيقونات سطح المكتب:>
+
+
+
+
+<checkbox auto-refresh="true">
+	<label>إظهار الأيقونات</label>
+	<input>gsettings get org.gnome.desktop.background show-desktop-icons</input>
+	<action>if true gsettings set org.gnome.desktop.background show-desktop-icons true</action>
+	<action>if false gsettings set org.gnome.desktop.background show-desktop-icons false</action>
+</checkbox>
+
+<checkbox auto-refresh="true">
+	<label>أيقونة المنزل</label>
+	<input>gsettings get org.gnome.nautilus.desktop home-icon-visible</input>
+	<action>if true gsettings set org.gnome.nautilus.desktop home-icon-visible true</action>
+	<action>if false gsettings set org.gnome.nautilus.desktop home-icon-visible false</action>
+</checkbox>
+
+<checkbox auto-refresh="true">
+	<label>أيقونة الشبكة</label>
+	<input>gsettings get org.gnome.nautilus.desktop network-icon-visible</input>
+	<action>if true gsettings set org.gnome.nautilus.desktop network-icon-visible true</action>
+	<action>if false gsettings set org.gnome.nautilus.desktop network-icon-visible false</action>
+</checkbox>
+
+<checkbox auto-refresh="true">
+	<label>أيقونة المهملات</label>
+	<input>gsettings get org.gnome.nautilus.desktop trash-icon-visible</input>
+	<action>if true gsettings set org.gnome.nautilus.desktop trash-icon-visible true</action>
+	<action>if false gsettings set org.gnome.nautilus.desktop trash-icon-visible false</action>
+</checkbox>
+
+<checkbox auto-refresh="true">
+	<label>الأقراص القابلة للإزالة</label>
+	<input>gsettings get org.gnome.nautilus.desktop volumes-visible</input>
+	<action>if true gsettings set org.gnome.nautilus.desktop volumes-visible true</action>
+	<action>if false gsettings set org.gnome.nautilus.desktop volumes-visible false</action>
+</checkbox>
+
+</frame>
+
+<frame متصفح الملفات:>
+
+	<checkbox auto-refresh="true">
+	<label>إظهار الشريط الجانبي</label>
+	<input>$test</input>
+	<action>if true gsettings set org.gnome.nautilus.window-state start-with-sidebar true</action>
+	<action>if false gsettings set org.gnome.nautilus.window-state start-with-sidebar false</action>
+</checkbox>
+
+<checkbox auto-refresh="true">
+	<label>إظهار شريط الموقع</label>
+	<input>gsettings get org.gnome.nautilus.preferences always-use-location-entry</input>
+	<action>if true gsettings set org.gnome.nautilus.preferences always-use-location-entry true</action>
+	<action>if false gsettings set org.gnome.nautilus.preferences always-use-location-entry false</action>
+</checkbox>
+
+<checkbox auto-refresh="true">
+	<label>إظهار الملفات المخفية</label>
+	<input>gsettings get org.gnome.nautilus.preferences show-hidden-files</input>
+	<action>if true gsettings set org.gnome.nautilus.preferences show-hidden-files true</action>
+	<action>if false gsettings set org.gnome.nautilus.preferences show-hidden-files false</action>
+</checkbox>
+
+<checkbox auto-refresh="true">
+	<label>عرض المجلدات أولًا</label>
+	<input>gsettings get org.gnome.nautilus.preferences sort-directories-first</input>
+	<action>if true gsettings set org.gnome.nautilus.preferences sort-directories-first true</action>
+	<action>if false gsettings set org.gnome.nautilus.preferences sort-directories-first false</action>
+</checkbox>
+
+
+</frame>
+</hbox>
+
+<frame إدارة الخطوط:>
+<hbox space-expand="true" space-fill="true">
+	<text><label>يمكنك القيام بتعديل الخطوط وإدارتها من هنا.</label></text>
+
+	<pixmap icon_size="6">
+	<width>48</width>
+	<input file>"/usr/share/helal-control-center/images/fonts-download.svg"</input>
+	</pixmap>
+</hbox>
+
+<hbox>
+<text><label>الخط الإفتراضي:</label></text>
+
+<fontbutton space-expand="true" space-fill="true">
+	<input>fontname</input>
+	<variable>font</variable>
+	<action>gsettings set org.gnome.desktop.interface font-name "$font"</action>
+</fontbutton>
+</hbox>
+
+<hbox>
+<text><label>خط العنوان:</label></text>
+
+<fontbutton space-expand="true" space-fill="true">
+	<input>wfontname</input>
+	<variable>font2</variable>
+	<action> gsettings set org.gnome.desktop.wm.preferences titlebar-font "$font2"</action>
+</fontbutton>
+</hbox>
+
+</frame>
+
+<frame استعادة هلال:>
+
+<hbox space-expand="true" space-fill="true">
+
+
+<text><label>يمكن للبرنامج القيام بنسخ الإعدادات والسمات الموجودة فقط في مجلد المنزل الخاص بك,اختر المكان المطلوب لحفظ الملف الناتج فيه.</label></text>
+	<pixmap>
+	<width>48</width>
+	<input file>/usr/share/helal-control-center/images/system-recovery.svg</input>
+	</pixmap>
+</hbox>
+
+
+
+<hbox>
+<entry accept="directory">
+        	  <label>حفظ الملف في:</label>
+		  <default>/home/'$USER'</default>
+        	  <variable>FILE_DIRECTORY</variable>
+      		 </entry>
+
+      		<button>
+        	  <input file stock="gtk-open"></input>
+        	  <action type="fileselect">FILE_DIRECTORY</action>
+      		</button>
+
+<button use-stock="true" image-position="1" relief="1">
+	<width>32</width>
+	<variable>backup</variable>
+	<input file>/usr/share/helal-control-center/images/backup.svg</input>
+	<label>نسخ</label>
+<action>mkdir /home/$USER/hbackup</action>
+<action>cp -R /home/$USER/hbackup files</action>
+<action>cp -R /home/$USER/.cache files</action>
+<action>cp -R /home/$USER/.fonts files</action>
+<action>cp -R /home/$USER/.gnome2 files</action>
+<action>cp -R /home/$USER/.gconf files</action>
+<action>cp -R /home/$USER/.gimp-2.6 files</action>
+<action>cp -R /home/$USER/.gimp-2.8 files</action>
+<action>cp -R /home/$USER/.gnupg files</action>
+<action>cp -R /home/$USER/.local files</action>
+<action>cp -R /home/$USER/.mozilla files</action>
+<action>cp -R /home/$USER/.pulse files</action>
+<action>cp -R /home/$USER/.dbus files</action>
+<action>cp -R /home/$USER/.icons files</action>
+<action>cp -R /home/$USER/.config files</action>
+<action>cp -R /home/$USER/.themes files</action>
+<action>chmod -R 777 files</action>
+<action>tar -cf $FILE_DIRECTORY/h-backup.zip files</action>
+<action>rm -R files</action>
+
+
+	</button>
+
+</hbox>
+
+
+</frame>
+
+</vbox>
+
+
+<vbox scrollable="true">
+
+
+
+<frame كرت الشاشة:>
+
+<hbox space-fill="true" space-expand="true">
+
+<text> <label>اختر اسم تعريف كرت الشاشة الخاص بك لكي يتم تثبيته,تحتاج إلى اتصال بالوِب لإكمال العملية.</label> </text>
+
+	<pixmap>
+	<width>48</width>
+	<input file>"/usr/share/helal-control-center/images/hardware.svg"</input>
+	</pixmap>
+
+</hbox>
+
+<hbox space-expand="true" space-fill="false">
+	<button use-stock="true" image-position="2" relief="2">
+	<width>32</width>
+	<input file>"/usr/share/helal-control-center/images/nvidia.svg"</input>
+	<label>كرت Nvidia</label>
+	<action>xterm -e "sudo apt-get install nvidia-current && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="2" relief="2">
+	<width>32</width>
+	<input file>'/usr/share/helal-control-center/images/ati.svg'</input>
+	<label>كرت ATI</label>
+	<action>xterm -e "sudo apt-get install fglrx && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+</hbox>
+</frame>
+
+<frame دعم تقنية Nvidia Optimus:>
+<hbox space-fill="true" space-expand="true">
+
+<text> <label>يمكنك القيام بدعم تقنية Nvidia Optimus على الحاسوب الخاص بك، لا تطبق الخيار إن لم يمتلك كرت الشاشة الخاصة بك هذه التقنية.</label> </text>
+
+	<pixmap>
+	<width>48</width>
+	<input file>"/usr/share/helal-control-center/images/optimus.png"</input>
+	</pixmap>
+
+</hbox>
+
+<hbox space-fill="true" space-expand="true">
+	<button use-stock="true" image-position="2" relief="2">
+	<width>32</width>
+	<input file>'/usr/share/helal-control-center/images/nvidia.svg'</input>
+	<label>دعم Nvidia Optimus</label>
+	<action>optimus</action>
+	<action>/tmp/run</action>
+	</button>
+
+</hbox>
+</frame>
+
+<frame العتاد:>
+
+<hbox space-fill="true" space-expand="true">
+
+<text><label>من هنا يمكنك معرفة مواصفات عتاد جهازك بالإضافة إلى التحكم في خيارات الشبكة والإنترنت.</label></text>
+
+<pixmap icon_size="6">
+	<width>48</width>
+	<input file>"/usr/share/helal-control-center/images/hardware-info.svg"</input>
+	</pixmap>
+
+
+</hbox>
+
+
+<hbox space-expand="true" space-fill="true"><text><label>المعالج:</label></text></hbox>
+<hbox>
+
+<text selectable="true"  width-request="400">
+
+	<input>cpu</input>
+</text>
+
+</hbox>
+
+<hbox space-expand="true" space-fill="true"><text><label>كرت الشاشة:</label></text></hbox>
+<hbox>
+
+<text selectable="true" width-request="400">
+
+	<input>Vga_card</input>
+</text>
+
+</hbox>
+
+<hbox space-expand="true" space-fill="true"><text><label>كرت الشبكة:</label></text></hbox>
+<hbox>
+
+<text selectable="true" width-request="400">
+
+	<input>ethernet</input>
+</text>
+
+</hbox>
+<hbox space-expand="true" space-fill="true"><text><label>كرت الصوت:</label></text></hbox>
+<hbox>
+
+<text selectable="true" width-request="400">
+
+	<input>lspci|grep Audio</input>
+</text>
+
+</hbox>
+
+
+
+
+<hbox space-fill="true" space-expand="true">
+
+
+
+<button use-stock="true" image-position="4" relief="1">
+	<input file>'/usr/share/helal-control-center/images/hardware-info.svg'</input>
+	<label>المزيد من التفاصيل</label>	
+	<width>48</width>
+	<action>hardinfo &</action>
+</button>
+
+<button use-stock="true" image-position="4" relief="1">
+	<label>نسخ إلى ملف</label>
+	<input file>'/usr/share/helal-control-center/images/copy-hardware-info-text.svg'</input>
+	<width>48</width>
+	<action>cat /proc/cpuinfo|grep "model name" >> /tmp/hardware</action>
+<action>echo "-------------------------" >> /tmp/hardware</action>
+<action>lspci|grep Audio >> /tmp/hardware</action>
+<action>echo "-------------------------" >> /tmp/hardware</action>
+<action>lspci|grep VGA >> /tmp/hardware</action>
+<action>echo "-------------------------" >> /tmp/hardware</action>
+<action>lspci|grep Ethernet && lspci|grep Network >> /tmp/hardware</action>
+<action>echo "-------------------------" >> /tmp/hardware</action>
+<action>lspci|grep Audio >> /tmp/hardware</action>
+<action>gedit /tmp/hardware</action>	
+<action>sleep 1</action>
+<action>rm /tmp/hardware</action>
+
+</button>
+	
+</hbox>
+</frame>
+
+
+<frame الإنترنت:>
+
+<hbox space-fill="true" space-expand="true">
+<text><label>مدير الشبكة هو التطبيق الذي يسمح لك بالإتصال بالوِب, وهو موجود في أعلى الشريط العلوي على اليمين,يمكنك تعديله من هنا.</label></text>
+
+	<pixmap icon_size="6">
+	<width>48</width>
+	<input file>"/usr/share/helal-control-center/images/networking.svg"</input>
+	</pixmap>
+
+</hbox>
+
+<hbox space-fill="true" space-expand="true">
+
+
+	<button use-stock="true" image-position="4" relief="1">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/network-editor.svg"</input>
+	<label>إدارة الاتصالات</label>
+	<action>nm-connection-editor &</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="1">
+	<width>24</width>
+	<input file>'/usr/share/helal-control-center/images/network-settings.svg'</input>
+	<label>تثبيت تعريفات ويندوز</label>
+	<action>gksu /usr/sbin/ndisgtk &</action>
+	</button>
+</hbox>
+
+<hbox space-fill="true" space-expand="true">
+
+	<button use-stock="true" image-position="4" relief="1">
+	<width>24</width>
+	<input file>'/usr/share/helal-control-center/images/site-block.svg'</input>
+	<label>حجب المواقع السيئة</label>
+	<action>mintnanny &</action>
+	</button>
+
+<button use-stock="true" image-position="4" relief="1">
+	<width>24</width>
+	<input file>'/usr/share/helal-control-center/images/windows-share.svg'</input>
+	<label>مشاركة ويندوز</label>
+	<action>gksu system-config-samba &</action>
+	</button>
+
+</hbox>
+	
+
+	
+
+
+</frame>
+
+
+
+
+
+</vbox>
+
+
+<vbox>
+
+<hbox space-fill="true" space-expand="true">
+<text><label>هنا تتوفر تشكيلة من البرامج المميزة للتثبيت , تحتاج إتصالاً بالوِب لتحميلها.</label></text>
+
+	<pixmap>
+	<width>48</width>
+	<input file>/usr/share/helal-control-center/images/software-add.svg</input>
+	</pixmap>
+</hbox>
+
+<frame منوعات:>
+<hbox space-fill="true" space-expand="true">
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="مدير حزم لواجهة كدي">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Apper</label>
+	<action>xterm -e "sudo apt-get install apper && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="مدير الولوج الافتراضي الخاص بواجهة لكسدي">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>LXDM</label>
+	<action>xterm -e "sudo apt-get install lxdm && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="مدير ولوج خفيف وسريع">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Slim</label>
+	<action>xterm -e "sudo apt-get install slim && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="محاكي لتشغيل الأنظمة الوهمية">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Qemu</label>
+	<action>xterm -e "sudo apt-get install qemu && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="مدير ملفات سريع لواجهة لكسدي">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Pcmanfm</label>
+	<action>xterm -e "sudo apt-get install pcmanfm && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="قارئ ملفات PDF لواجهة كدي">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Okular</label>
+	<action>xterm -e "sudo apt-get install okular && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+</hbox>
+<hbox space-fill="true" space-expand="true">
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="محرر مستندات متطور وخفيف">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Abiword</label>
+	<action>xterm -e "sudo apt-get install abiword && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="قاموس للمفردات يمتلك عدة مميزات، متوقف عن التطوير">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Stardict</label>
+	<action>xterm -e "sudo apt-get install stardict && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="برنامج لعمل مخططات خاصة للمشاريع التقنية والبرمجية">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Planner</label>
+	<action>xterm -e "sudo apt-get install planner && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="أداة تسمح لك بالبحث السريع في نظامك وتشغيل مهام أخرى">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Gnome do</label>
+	<action>xterm -e "sudo apt-get install gnome-do && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+</hbox>
+</frame>
+
+<frame ألعاب:>
+<hbox space-fill="true" space-expand="true">
+
+	<button use-stock="true" image-position="4" relief="2"  tooltip-text="لعبة استراتيجية تتحدث عن الحروب في عام 2100">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Warzone2100</label>
+	<action>xterm -e "sudo apt-get install warzone2100 && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="لعبة استراتيجية مفتوحة المصدر، تتحدث عن الحروب في العصور القديمة">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>0.AD</label>
+	<action>xterm -e "sudo apt-get install 0ad && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="لعبة اسقاط الكرات المتجمدة الشهيرة">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>frozen-bubble</label>
+	<action>xterm -e "sudo apt-get install frozen-bubble && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+</hbox>
+<hbox space-fill="true" space-expand="true">
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="لعبة البطريق ثنائية الأبعاد">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Supertux</label>
+	<action>xterm -e "sudo apt-get install supertux && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="لعبة السفن الحربية القتالية لواجهة كدي">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>navalbattle</label>
+	<action>xterm -e "sudo apt-get install knavalbattle && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2"  tooltip-text="برنامج لتشغيل العديد من برامج ويندوز على لينُكس">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Playonlinux</label>
+	<action>xterm -e "sudo apt-get install playonlinux && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+
+</hbox>
+</frame>
+
+<frame واجهات:>
+<hbox space-fill="true" space-expand="true">
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="واجهة ماتيه هي اشتقاق لجنوم 2 لتعمل على التوزيعات الحديثة">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>MATE</label>
+	<action>xterm -e "sudo apt-get install mate-desktop-environment && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="يونتي هي الواجهة الرسمية من قبل توزيعة أوبونتو">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Xfce</label>
+	<action>xterm -e "sudo apt-get install xfce4 && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="سينامُن هي الواجهة الرسمية لتوزيعة لينُكس منت، مشتقة من جنوم شل">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Cinnamon</label>
+	<action>xterm -e "sudo apt-get install cinnamon && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="كدي هي واجهة لينُكس الأكثر قابلية للتخصيص">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>KDE</label>
+	<action>xterm -e "sudo apt-get install kubuntu-desktop && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="لكسدي هي واجهة تتميز بالخفة وقلة استهلاك العتاد">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>LXDE</label>
+	<action>xterm -e "sudo apt-get install lxde && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+
+</hbox>
+</frame>
+<frame إنترنت:>
+<hbox space-fill="true" space-expand="true">
+
+	<button use-stock="true" image-position="4" relief="2"  tooltip-text="متصفح كروميوم المفتوح من جوجل">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Firefox</label>
+	<action>xterm -e "sudo apt-get install firefox && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2"  tooltip-text="متصفح ميدوري الخفيف، مُبرمج بواسطة webkit">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Midori</label>
+	<action>xterm -e "sudo apt-get install midori && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2"  tooltip-text="برنامج محادثة لعدة برتوكولات مثل هوتميل وجابر">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Emesene</label>
+	<action>xterm -e "sudo apt-get install emesene && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2"  tooltip-text="برنامج محادثة لبرتوكول هوتميل، يعيبه عدم دعم العربية ">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Amsn</label>
+	<action>xterm -e "sudo apt-get install amsn && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+</hbox>
+
+<hbox space-fill="true" space-expand="true"  tooltip-text="برنامج ثندربيرد الشهير لإدارة البريد">
+	<button use-stock="true" image-position="4" relief="2">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>MozillaThunderbird</label>
+	<action>xterm -e "sudo apt-get install thunderbird && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="برنامج رسومي بسيط لإدارة التحميلات">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>kget</label>
+	<action>xterm -e "sudo apt-get install kget && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="برنامج لإدارة ونشر ومتابعة تغريدات تويتر على سطح المكتب">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Choqok</label>
+	<action>xterm -e "sudo apt-get install choqok && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2" tooltip-text="متصفح الوب الشهير أوبرا">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Opera</label>
+	<action>xterm -e "sudo apt-get install opera && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+	<button use-stock="true" image-position="4" relief="2"  tooltip-text="برنامج تحليل حالة الشبكة والعمليات المُرسلة والمُستقبلة">
+	<width>24</width>
+	<input file>"/usr/share/helal-control-center/images/package.png"</input>
+	<label>Wireshark</label>
+	<action>xterm -e "sudo apt-get install wireshark && sleep 3"</action>
+	<action>/tmp/run</action>
+	</button>
+
+
+
+</hbox>
+</frame>
+
+
+</vbox>
+
+</notebook>
+<vseparator height-request="10"></vseparator>
+
+	</vbox>
+
+</window>
+'
+export About='
+
+<window title="حول" icon-name="gtk-about" resizable="true" border-width="3">
+<notebook tab-labels="حول|المطورون" page="00" tab-hborder="20" tab-pos="00" >
+   <vbox>	
+
+	<pixmap>
+        <width>96</width>
+        <input file>'"/usr/share/helal-control-center/images/helal-control-center.svg"'</input>
+        </pixmap>
+
+<text>
+<label>مركز تحكم لتوزيعة هلال لينُكس</label>
+
+</text>
+
+
+
+
+   </vbox>
+
+<vbox>
+<text><label>برمجه:</label></text>
+<text><label>محمد هاني صباغ hannysabbagh@hotmail.com </label></text>
+<text><label>دعم جمالي:</label></text>
+<text><label>مصطفى الصبار mustaphaasbbasr@gmail.com</label></text>
+<text><label>سيف الإسلام البكري albakry@gmail.com </label></text>
+</vbox>
+</notebook>
+</window>
+'
+
+#run the MAIN_DIALOG variable and put it to the center.
+gtkdialog -p MAIN_DIALOG --center

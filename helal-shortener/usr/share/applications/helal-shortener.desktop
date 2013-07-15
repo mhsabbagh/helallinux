@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Helal URL Shortener
+Name[ar]= مقصر روابط هلال
+Comment=Shorten Web URLs easily from the desktop.
+Comment[ar]= تقصير روابط الوب بسهولة من سطح المكتب.
+Categories=helallinux;
+Exec=helal-shortener
+Icon=stock_internet
+StartupNotify=true
+Terminal=false
+Type=Application
+
