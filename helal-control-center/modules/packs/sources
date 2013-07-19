@@ -1,7 +1,0 @@
-[module]
-name = Software Sources
-name[ar] = مصادر البرمجيات
-ico = sources.png
-desc = Add or remove package repositories
-desc[ar] = إضافة وإزالة مصادر الحزم
-command = gksu software-properties-gtk
