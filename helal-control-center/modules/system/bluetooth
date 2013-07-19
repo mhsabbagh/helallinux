@@ -1,7 +1,0 @@
-[module]
-name = Bluetooth Manager
-name[ar] = مدير البلوتوث
-ico = bluetooth.svg
-desc = Adjust bluetooth settings
-desc[ar] = ضبط إعدادات البلوتوث
-command = bluetooth-wizard
