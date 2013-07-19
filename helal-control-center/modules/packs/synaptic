@@ -1,7 +1,0 @@
-[module]
-name = Synaptic Package Manager
-name[ar] = مدير الحزم سينابتك
-ico = softwarecenter.png
-desc = Add or remove packages and programs
-desc[ar] = إضافة وإزالة الحزم والبرامج
-command = gksu synaptic
