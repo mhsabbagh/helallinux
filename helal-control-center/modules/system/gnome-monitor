@@ -1,7 +1,0 @@
-[module]
-name = System Monitor
-name[ar] = مراقب النظام
-ico = monitor.svg
-desc = Watch system preformance
-desc[ar] = مراقبة أداء النظام
-command = gnome-system-monitor
