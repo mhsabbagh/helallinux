@@ -1,7 +1,0 @@
-[module]
-name = Keyboard
-name[ar] = لوحة المفاتيح
-ico = keyboard.png
-desc = change keyboard settings
-desc[ar] = ضبط إعدادات لوحة المفاتيح
-command = gnome-control-center keyboard
