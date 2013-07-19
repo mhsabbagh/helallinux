@@ -1,7 +1,0 @@
-[module]
-name = Startup Manager
-name[ar] = بدء التشغيل
-ico = startup.png
-desc = Add/Remove startup services.
-desc[ar] = إضافة/إزالة تطبيقات بدء التشغيل
-command = gnome-session-properties
