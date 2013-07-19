@@ -1,7 +1,0 @@
-[module]
-name = Tweak Tool
-name[ar] = أداة الضبط
-ico = config-themes.svg
-desc = change keyboard settings
-desc[ar] = ضبط مظهر النظام وخصائص الواجهة
-command = gnome-tweak-tool
