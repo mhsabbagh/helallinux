@@ -1,7 +1,0 @@
-[module]
-name = Displays
-name[ar] = الشاشات
-ico = displays.png
-desc = Take control in screen-resoultion
-desc[ar] = التحكم في دقة الشاشة
-command = gnome-control-center display
