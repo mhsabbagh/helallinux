@@ -1,7 +1,0 @@
-[module]
-name = Date & Time
-name[ar] = الوقت والتاريخ
-ico = time.png
-desc = Adjust system date and time
-desc[ar] = ضبط وقت النظام وتاريخه
-command = gnome-control-center datetime
