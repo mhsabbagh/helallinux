@@ -1,7 +1,0 @@
-[module]
-name = Language Settings
-name[ar] = إعدادات اللغة
-ico = system-language.svg
-desc = change language settings
-desc[ar] = ضبط إعدادات لغة النظام
-command = gnome-control-center language-support
