@@ -1,8 +1,0 @@
-Package: helal-wysiwyg-editor
-Version: 1.0.3
-Architecture: i386
-Maintainer: M.hannysabbagh <hannysabbagh@hotmail.com>
-Depends: python-webkit (>= 1.1.5)
-Section: Miscellaneous;
-Priority: optional
-Description: A WYSIWYG editor to edit HTML files easily.
