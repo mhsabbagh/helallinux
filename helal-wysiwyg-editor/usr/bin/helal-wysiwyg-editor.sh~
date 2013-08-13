@@ -1,7 +1,0 @@
-#!/bin/sh
-gui_lang=$(cat /home/$USER/.config/user-dirs.locale)
-if [[ "$gui_lang" == *ar* ]];then
-    exec /usr/bin/helal-wysiwyg-editor-ar
-else
-    exec /usr/bin/helal-wysiwyg-editor-en
-fi
